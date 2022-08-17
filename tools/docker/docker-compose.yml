@@ -6,6 +6,8 @@ services:
     image: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: example
+    ports:
+      - 3306:3306
   adminer:
     image: adminer
     ports:
