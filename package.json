@@ -1,0 +1,15 @@
+{
+  "name": "calendars",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BasilioDavid/calendars.git"
+  },
+  "author": "Basilio David Gómez Fernández",
+  "license": "Copyright",
+  "bugs": {
+    "url": "https://github.com/BasilioDavid/calendars/issues"
+  },
+  "homepage": "https://github.com/BasilioDavid/calendars#readme"
+}
