@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Mariadb, Pool } from '@syukurilexs/nestjs-mariadb';
+import { DBConnection } from './db-connection';
 
 @Injectable()
 export class ImagesRepository {
-  constructor(@Mariadb() private readonly pool: Pool) {}
+  constructor(private readonly dbConnection: DBConnection) {}
+
   async insertImage(fileName: string) {
-    const conn = await this.pool.getConnection();
-    const result = await conn.query('SELECT * FROM IMAGES');
-    await conn.release();
+    const result = await this.dbConnection
+      .selectFrom('image')
+      .selectAll()
+      .execute();
     return result;
   }
 }
