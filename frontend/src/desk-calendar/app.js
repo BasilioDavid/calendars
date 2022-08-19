@@ -1,5 +1,5 @@
 const options = {
-  url: 'http://localhost:3000/calendars/v1/post',
+  url: 'http://localhost:3000/images',
   method: 'post',
   paramName: 'photos',
   maxFiles: 13,
