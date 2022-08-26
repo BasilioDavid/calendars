@@ -12,6 +12,10 @@ export class UUID
   extends ValueObject<UUIDProps>
   implements ToPrimitives<string>
 {
+  static fromPrimitives(value = generateUniqString()) {
+    return new UUID({ value: NonEmptyString.fromPrimitives(value) });
+  }
+
   constructor(
     props: UUIDProps = {
       value: new NonEmptyString({ value: generateUniqString() }),

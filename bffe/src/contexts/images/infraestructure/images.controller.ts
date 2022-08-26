@@ -9,7 +9,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ImagesService } from '../core/images.service';
 import { Request } from '@nestjs/common';
 import { Image } from '../core/image.value-object';
-import { UUID } from 'src/shared/building-blocks/uuid.value-object';
 
 @Controller('images')
 export class ImagesController {
@@ -22,9 +21,9 @@ export class ImagesController {
     @UploadedFile() data: Express.Multer.File,
   ): void {
     this.imagesService.uploadImage(
-      new Image({
+      Image.fromPrimitives({
         buffer: data,
-        name: new UUID(),
+        mimetype: data.mimetype,
       }),
     );
   }

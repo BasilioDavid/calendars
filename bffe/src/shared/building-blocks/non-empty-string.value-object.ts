@@ -10,6 +10,10 @@ export class NonEmptyString
   extends ValueObject<NonEmptyStringProps>
   implements ToPrimitives<string>
 {
+  static fromPrimitives(value: string) {
+    return new NonEmptyString({ value });
+  }
+
   constructor({ value }: NonEmptyStringProps) {
     super({ value });
     invariant(
@@ -17,6 +21,7 @@ export class NonEmptyString
       typeof value === 'string' && value.length > 0,
     );
   }
+
   toPrimitives(): string {
     return this.props.value;
   }
