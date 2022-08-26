@@ -8,7 +8,7 @@ export const environment: ENV = {
     host: 'localhost',
     user: {
       user: 'root',
-      password: '1234',
+      password: 'example',
     },
   },
 };
