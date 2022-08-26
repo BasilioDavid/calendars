@@ -24,7 +24,6 @@ export class ImagesController {
     this.imagesService.uploadImage(
       new Image({
         buffer: data,
-        id: new UUID(),
         name: new UUID(),
       }),
     );

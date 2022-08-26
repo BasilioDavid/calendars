@@ -5,11 +5,10 @@ import { DBConnection } from './db-connection';
 export class ImagesRepository {
   constructor(private readonly dbConnection: DBConnection) {}
 
-  async insertImage(fileName: string) {
-    const result = await this.dbConnection
-      .selectFrom('image')
-      .selectAll()
-      .execute();
-    return result;
+  insertImage(fileName: string) {
+    return this.dbConnection
+      .insertInto('image')
+      .values({ fileName })
+      .executeTakeFirstOrThrow();
   }
 }

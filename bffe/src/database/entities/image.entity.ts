@@ -1,4 +1,4 @@
 export interface ImageEntity {
-  id: string;
+  id: number;
   fileName: string;
 }

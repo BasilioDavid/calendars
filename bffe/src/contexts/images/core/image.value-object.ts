@@ -7,13 +7,11 @@ import {
 import { UUID } from 'src/shared/building-blocks/uuid.value-object';
 
 interface ImageProps {
-  id: UUID;
   name: UUID;
   buffer: Express.Multer.File;
 }
 
 interface ImagePrimitives {
-  id: string;
   name: string;
   buffer: Express.Multer.File;
 }
@@ -24,13 +22,11 @@ export class Image
 {
   constructor(props: ImageProps) {
     super(props);
-    invariant('id prop must be a uuid', props.id instanceof UUID);
     invariant('name prop must be a uuid', props.name instanceof UUID);
   }
 
   toPrimitives(): ImagePrimitives {
     return {
-      id: this.props.id.toPrimitives(),
       name: this.props.name.toPrimitives(),
       buffer: this.props.buffer,
     };

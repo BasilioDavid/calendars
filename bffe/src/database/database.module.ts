@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
 import { CamelCasePlugin, Kysely, MysqlDialect } from 'kysely';
-import { createPool } from 'mariadb';
+import { createPool } from 'mysql2';
 import { environment } from 'src/shared/environments/environment';
 import { DBConnection } from './db-connection';
 import { Database } from './entities/database.entity';
+import { ImagesRepository } from './images.repository';
 
 @Module({
   providers: [
     {
       provide: DBConnection,
-      useFactory: async () => {
+      useFactory: () =>
         new Kysely<Database>({
           dialect: new MysqlDialect({
             pool: createPool({
@@ -26,10 +27,11 @@ import { Database } from './entities/database.entity';
           log(event) {
             console.log(event);
           },
-        });
-      },
+        }),
     },
+    ImagesRepository,
   ],
+  exports: [ImagesRepository],
   controllers: [],
 })
 export class DatabaseModule {}

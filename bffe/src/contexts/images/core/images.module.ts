@@ -4,7 +4,7 @@ import { ImagesController } from '../infraestructure/images.controller';
 import { ImagesService } from './images.service';
 
 @Module({
-  imports: [],
+  imports: [DatabaseModule],
   controllers: [ImagesController],
   providers: [ImagesService],
 })
