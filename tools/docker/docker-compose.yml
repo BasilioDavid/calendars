@@ -6,9 +6,12 @@ services:
     image: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: example
+      MYSQL_ROOT_HOST: '%'
     ports:
       - 3306:3306
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
+    networks:
+      - intranet
+
+networks:
+  intranet:
+    driver: bridge
