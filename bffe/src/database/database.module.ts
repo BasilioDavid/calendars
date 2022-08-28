@@ -4,7 +4,6 @@ import { createPool } from 'mysql2';
 import { environment } from 'src/shared/environments/environment';
 import { DBConnection } from './db-connection';
 import { Database } from './entities/database.entity';
-import { ImagesRepository } from './images.repository';
 
 @Module({
   providers: [
@@ -29,9 +28,8 @@ import { ImagesRepository } from './images.repository';
           },
         }),
     },
-    ImagesRepository,
   ],
-  exports: [ImagesRepository],
+  exports: [DBConnection],
   controllers: [],
 })
 export class DatabaseModule {}

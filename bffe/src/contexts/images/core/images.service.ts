@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { writeFile } from 'fs/promises';
-import { ImagesRepository } from 'src/database/images.repository';
 import { Image } from './image.value-object';
+import { ImagesRepository } from './images.repository';
 
 @Injectable()
 export class ImagesService {
