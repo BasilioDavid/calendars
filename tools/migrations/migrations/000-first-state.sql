@@ -5,7 +5,7 @@ CREATE DATABASE calendars CHARACTER SET 'UTF8';
 USE calendars;
 
 CREATE TABLE user_status (
-    id INTEGER NOT NULL PRIMARY KEY ,
+    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT ,
     type VARCHAR(100) NOT NULL
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE user (
     name VARCHAR(100) NOT NULL ,
     password VARCHAR(100) NOT NULL ,
     email VARCHAR(100) NOT NULL,
-    createAt DATETIME NOT NULL ,
+    createAt DATETIME NOT NULL DEFAULT NOW(),
     status_id INTEGER NOT NULL ,
     UNIQUE KEY key_ext_id (ext_id) ,
     PRIMARY KEY (id),
