@@ -5,7 +5,7 @@ import {
   ValueObject,
 } from 'src/shared/building-blocks/public_api';
 
-interface UserInput {
+interface UserProps {
   password: NonEmptyString;
   //TODO: add email validation
   email: NonEmptyString;
@@ -16,11 +16,13 @@ interface UserToPrimitives {
   email: string;
 }
 
+type UserFromPrimitives = UserToPrimitives;
+
 export class User
-  extends ValueObject<UserInput>
+  extends ValueObject<UserProps>
   implements ToPrimitives<UserToPrimitives>
 {
-  static fromPrimitives(data: UserToPrimitives) {
+  static fromPrimitives(data: UserFromPrimitives) {
     return new User({
       password: new NonEmptyString({ value: data.password }),
       email: new NonEmptyString({ value: data.email }),
@@ -34,14 +36,14 @@ export class User
     };
   }
 
-  constructor(data: UserInput) {
+  constructor(data: UserProps) {
     invariant(
       'password must be a NonEmptyString instance',
-      data.password instanceof NonEmptyString,
+      data.password instanceof NonEmptyString
     );
     invariant(
       'email must be a NonEmptyString instance',
-      data.email instanceof NonEmptyString,
+      data.email instanceof NonEmptyString
     );
     super(data);
   }
