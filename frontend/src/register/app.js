@@ -1,4 +1,4 @@
-const HOSTNAME_URL = 'http://localhost:3000/user/login';
+const HOSTNAME_URL = 'http://localhost:3000/user/register';
 
 function sendForm(body) {
   return fetch(HOSTNAME_URL, {
@@ -12,7 +12,12 @@ function sendForm(body) {
 
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
-async function login(event) {
+const nameField = document.getElementById('name');
+async function register(event) {
   event.preventDefault();
-  await sendForm({ email: emailField.value, password: passwordField.value });
+  await sendForm({
+    email: emailField.value,
+    password: passwordField.value,
+    name: nameField.value,
+  });
 }

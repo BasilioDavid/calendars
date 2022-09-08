@@ -9,7 +9,7 @@ export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
   @Post('login')
-  login(@Req() expressRequest: Request, @Body() user: UserLoginDto): void {
+  login(@Body() user: UserLoginDto): void {
     this.loginService.handle(User.fromPrimitives(user));
   }
 }

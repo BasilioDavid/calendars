@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { CamelCasePlugin, Kysely, MysqlDialect } from 'kysely';
 import { createPool } from 'mysql2';
 import { environment } from 'src/shared/environments/environment';
 import { DBConnection } from './db-connection';
 import { Database } from './entities/database.entity';
 
+@Global()
 @Module({
   providers: [
     {
