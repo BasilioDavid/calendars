@@ -8,7 +8,7 @@ export class UsersController {
   constructor(private readonly registerService: RegisterService) {}
 
   @Post('register')
-  register(@Body() data: UserRegisterDto): void {
-    this.registerService.handle(User.fromPrimitives({ ...data }));
+  register(@Body() data: UserRegisterDto): Promise<{ token: string }> {
+    return this.registerService.handle(User.fromPrimitives({ ...data }));
   }
 }

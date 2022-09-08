@@ -11,4 +11,5 @@ export const environment: ENV = {
       password: 'example',
     },
   },
+  jwtSecret: 'Secret',
 };

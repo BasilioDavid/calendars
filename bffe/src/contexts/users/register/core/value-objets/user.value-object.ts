@@ -4,21 +4,28 @@ import {
   ToPrimitives,
   ValueObject,
 } from 'src/shared/building-blocks/public_api';
+import { UUID } from 'src/shared/building-blocks/uuid.value-object';
 
 interface UserProps {
   name: NonEmptyString;
   password: NonEmptyString;
   //TODO: add email validation
   email: NonEmptyString;
+  extId: UUID;
 }
 
 interface UserToPrimitives {
   password: string;
   email: string;
   name: string;
+  extId: string;
 }
 
-type UserFromPrimitives = UserToPrimitives;
+type UserFromPrimitives = {
+  password: string;
+  email: string;
+  name: string;
+};
 
 export class User
   extends ValueObject<UserProps>
@@ -29,6 +36,7 @@ export class User
       password: new NonEmptyString({ value: data.password }),
       email: new NonEmptyString({ value: data.email }),
       name: new NonEmptyString({ value: data.name }),
+      extId: new UUID(),
     });
   }
 
@@ -37,10 +45,11 @@ export class User
       email: this.props.email.toPrimitives(),
       password: this.props.password.toPrimitives(),
       name: this.props.name.toPrimitives(),
+      extId: this.props.extId.toPrimitives(),
     };
   }
 
-  constructor(data: UserProps) {
+  private constructor(data: UserProps) {
     invariant(
       'password must be a NonEmptyString instance',
       data.password instanceof NonEmptyString

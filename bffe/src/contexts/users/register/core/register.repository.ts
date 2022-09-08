@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DBConnection } from 'src/database/db-connection';
 import { USER_STATUS } from 'src/shared/consts';
-import { generateUniqString } from 'src/shared/utils/uuid';
 
 @Injectable()
 export class RegisterRepository {
@@ -11,10 +10,12 @@ export class RegisterRepository {
     email,
     name,
     password,
+    extId,
   }: {
     email: string;
     name: string;
     password: string;
+    extId: string;
   }) {
     const user = await this.dbConnection
       .selectFrom('user')
@@ -33,8 +34,8 @@ export class RegisterRepository {
         password,
         name,
         status_id: USER_STATUS['ACTIVATED'],
-        extId: generateUniqString(),
-     	 })
+        extId,
+      })
       .execute();
   }
 }
