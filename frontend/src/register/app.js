@@ -1,4 +1,7 @@
-const HOSTNAME_URL = 'http://localhost:3000/user/register';
+import { addToLocalStorage } from '../common/localstorage';
+import { ENVIRONMENT } from '../common/const';
+
+const HOSTNAME_URL = `${ENVIRONMENT.API_URL}/user/register`;
 
 function sendForm(body) {
   return fetch(HOSTNAME_URL, {
@@ -13,20 +16,22 @@ function sendForm(body) {
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
 const nameField = document.getElementById('name');
+
 async function register(event) {
   event.preventDefault();
-  const token = await sendForm({
-    email: emailField.value,
-    password: passwordField.value,
-    name: nameField.value,
-  });
+  let token;
+  try {
+    token = await sendForm({
+      email: emailField.value,
+      password: passwordField.value,
+      name: nameField.value,
+    });
+  } catch (e) {
+    console.error('Couldnt send the form');
+    throw e;
+  }
   addToLocalStorage('token', token);
+  window.location.replace('/hub');
 }
 
-function getFromLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
-}
-
-function addToLocalStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+window.register = register;

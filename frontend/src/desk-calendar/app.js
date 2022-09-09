@@ -1,5 +1,7 @@
+import { ENVIRONMENT } from '../common/const';
+
 const options = {
-  url: 'http://localhost:3000/images',
+  url: `${ENVIRONMENT.API_URL}/images`,
   method: 'post',
   paramName: 'photos',
   maxFiles: 13,

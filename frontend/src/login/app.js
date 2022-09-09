@@ -1,4 +1,7 @@
-const HOSTNAME_URL = 'http://localhost:3000/user/login';
+import { addToLocalStorage } from '../common/localstorage';
+import { ENVIRONMENT } from '../common/const';
+
+const HOSTNAME_URL = `${ENVIRONMENT.API_URL}/user/login`;
 
 function sendForm(body) {
   return fetch(HOSTNAME_URL, {
@@ -14,5 +17,18 @@ const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
 async function login(event) {
   event.preventDefault();
-  await sendForm({ email: emailField.value, password: passwordField.value });
+  let token;
+  try {
+    token = await sendForm({
+      email: emailField.value,
+      password: passwordField.value,
+    });
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+  addToLocalStorage('token', token);
+  window.location.replace('/hub');
 }
+
+window.login = login;
