@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RegisterRepository } from './register.repository';
-import { TokenService } from './token.service';
+import { TokenService } from '../../shared/token.service';
 import { User } from './value-objets/user.value-object';
 
 @Injectable()

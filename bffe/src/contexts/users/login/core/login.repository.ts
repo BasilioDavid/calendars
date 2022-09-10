@@ -18,8 +18,6 @@ export class LoginRepository {
 
     return {
       extId: userDatabase.extId,
-      name: userDatabase.name,
-      email: user.email,
     };
   }
 }
