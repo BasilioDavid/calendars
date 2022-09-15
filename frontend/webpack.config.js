@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack'); //to access built-in plugins
 
 module.exports = {
   entry: {
@@ -10,4 +11,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].webpack.bundle.js',
   },
+  devtool: false,
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
+      filename: 'sourcemaps/[file].map',
+      publicPath: 'https://example.com/project/',
+      fileContext: 'public',
+    }),
+  ],
 };
