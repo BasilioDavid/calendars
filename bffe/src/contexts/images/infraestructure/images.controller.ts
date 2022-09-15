@@ -1,14 +1,14 @@
 import {
   Controller,
   Post,
-  Req,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImagesService } from '../core/images.service';
-import { Request } from '@nestjs/common';
 import { Image } from '../core/image.value-object';
+import { AuthGuard } from 'src/shared/auth/auth.guard';
 
 @Controller('images')
 export class ImagesController {
@@ -16,15 +16,13 @@ export class ImagesController {
 
   @Post('')
   @UseInterceptors(FileInterceptor('photos'))
-  uploadImage(
-    @Req() expressRequest: Request,
-    @UploadedFile() data: Express.Multer.File,
-  ): void {
+  @UseGuards(AuthGuard)
+  uploadImage(@UploadedFile() data: Express.Multer.File): void {
     this.imagesService.uploadImage(
       Image.fromPrimitives({
         buffer: data,
         mimetype: data.mimetype,
-      }),
+      })
     );
   }
 }

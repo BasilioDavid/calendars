@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DBConnection } from 'src/database/db-connection';
+import { DBConnection } from 'src/shared/database/db-connection';
 import { USER_STATUS } from 'src/shared/consts';
 
 @Injectable()

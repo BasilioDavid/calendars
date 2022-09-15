@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DBConnection } from '../../../database/db-connection';
+import { DBConnection } from '../../../shared/database/db-connection';
 
 @Injectable()
 export class ImagesRepository {
