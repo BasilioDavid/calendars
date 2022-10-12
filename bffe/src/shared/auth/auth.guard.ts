@@ -1,7 +1,14 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { QueryContextService } from '../query-context/query-context.service';
-import { TokenService } from './token.service';
 import { Request } from 'express';
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
+
+import { TokenService } from './token.service';
+import { UserService } from '../user/user.service';
+import { AuthRepository } from './auth.repository';
 
 interface User {
   email: string;
@@ -11,16 +18,24 @@ interface User {
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    private readonly queryContext: QueryContextService,
-    private readonly tokenService: TokenService
+    private readonly userService: UserService,
+    private readonly tokenService: TokenService,
+    private readonly authRepository: AuthRepository
   ) {}
 
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const token = context.switchToHttp().getRequest<Request>().headers[
       'authorization'
     ];
+    if (typeof token == 'undefined') {
+      throw new ForbiddenException();
+    }
     const user = this.tokenService.decode<User>(token);
-    this.queryContext.set('user', { extId: user.extId });
+    const userWellformed = await this.authRepository.getUser({
+      email: user.email,
+      extId: user.extId,
+    });
+    this.userService.set(userWellformed);
     return true;
   }
 }

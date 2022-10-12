@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class TokenService {
     const [method, token] = rawToken.split(' ') || [];
 
     if (method !== 'Bearer' || !token) {
-      throw new Error('Unauthorized');
+      throw new ForbiddenException();
     }
 
     return jwt.decode(token) as T;
