@@ -1,3 +1,5 @@
+import { token } from './token.service';
+
 export function preventDefault(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -17,4 +19,8 @@ export async function sendForm(
     headers,
   });
   return response.json();
+}
+
+export function clearToken() {
+  token.clear();
 }

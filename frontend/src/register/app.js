@@ -2,6 +2,8 @@ import { token as tokenService } from '../common/token.service';
 import { ENVIRONMENT } from '../common/const';
 import { sendForm, preventDefault } from '../common/utils';
 
+tokenService.clear();
+
 const API_URL = `${ENVIRONMENT.API_URL}/user/register`;
 
 const emailField = document.getElementById('email');
@@ -24,7 +26,7 @@ async function register(event) {
   // TODO: change this into a local storage service and a token service
   tokenService.set(token);
   // TODO: change routes :(
-  window.open('/hub');
+  window.open('/hub', '_self');
 }
 
 window.register = register;

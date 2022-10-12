@@ -1,25 +1,19 @@
-import { addToLocalStorage } from '../common/localstorage';
 import { ENVIRONMENT } from '../common/const';
+import { token as tokenService } from '../common/token.service';
+import { sendForm, preventDefault } from '../common/utils';
 
-const HOSTNAME_URL = `${ENVIRONMENT.API_URL}/user/login`;
+const API_URL = `${ENVIRONMENT.API_URL}/user/login`;
 
-function sendForm(body) {
-  return fetch(HOSTNAME_URL, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then((response) => response.json());
-}
+tokenService.clear();
 
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
+
 async function login(event) {
-  event.preventDefault();
+  preventDefault(event);
   let token;
   try {
-    token = await sendForm({
+    token = await sendForm(API_URL, 'POST', {
       email: emailField.value,
       password: passwordField.value,
     });
@@ -27,8 +21,10 @@ async function login(event) {
     console.error(e);
     throw e;
   }
-  addToLocalStorage('token', token);
-  window.location.replace('/hub');
+  // TODO: change this into a local storage service and a token service
+  tokenService.set(token);
+  // TODO: change routes :(
+  window.open('/hub', '_self');
 }
 
 window.login = login;

@@ -5,3 +5,7 @@ export function getFromLocalStorage(key) {
 export function addToLocalStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
+
+export function remoteFromLocalStorage(key) {
+  localStorage.removeItem(key);
+}
