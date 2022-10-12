@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { DBConnection } from 'src/shared/database/db-connection';
-import { USER_STATUS } from 'src/shared/consts';
+
+import { USER_STATUS } from '../../../../shared/consts';
+import { DBConnection } from '../../../../shared/database/db-connection';
 
 @Injectable()
 export class RegisterRepository {

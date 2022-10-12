@@ -1,9 +1,9 @@
-import { NonEmptyString } from 'src/shared/building-blocks/non-empty-string.value-object';
 import {
   invariant,
+  NonEmptyString,
   ToPrimitives,
   ValueObject,
-} from 'src/shared/building-blocks/public_api';
+} from '../../../../../shared/building-blocks/public_api';
 
 interface UserProps {
   password: NonEmptyString;

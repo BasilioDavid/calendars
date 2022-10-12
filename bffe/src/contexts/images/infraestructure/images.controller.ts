@@ -6,9 +6,10 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+
 import { ImagesService } from '../core/images.service';
 import { Image } from '../core/image.value-object';
-import { AuthGuard } from 'src/shared/auth/auth.guard';
+import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 @Controller('images')
 export class ImagesController {

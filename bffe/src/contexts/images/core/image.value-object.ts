@@ -1,12 +1,12 @@
 import {
   invariant,
-  NonEmptyString,
   ToPrimitives,
+  UUID,
   ValueObject,
-} from 'src/shared/building-blocks/public_api';
-import { UUID } from 'src/shared/building-blocks/uuid.value-object';
+} from '../../../shared/building-blocks/public_api';
 import { ImageBuffer } from './value-objects/buffer';
 import { Mimetype } from './value-objects/mimetype.value-object';
+
 /* {
   fieldname: 'photos',
   originalname: '1387285.jpg',
@@ -49,7 +49,7 @@ export class Image
     invariant('name prop must be a uuid instance', props.name instanceof UUID);
     invariant(
       'mimetype prop must be a Mimetype instance',
-      props.mimetype instanceof Mimetype,
+      props.mimetype instanceof Mimetype
     );
   }
 

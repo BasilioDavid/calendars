@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'src/shared/database/database.module';
+
+import { DatabaseModule } from '../../../shared/database/database.module';
 import { TokenService } from '../shared/token.service';
 import { LoginRepository } from './core/login.repository';
 import { LoginService } from './core/login.service';

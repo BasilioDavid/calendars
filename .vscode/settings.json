@@ -7,4 +7,5 @@
   "eslint.validate": ["javascript", "typescript"],
   "editor.tabSize": 2,
   "editor.insertSpaces": false,
+  "typescript.preferences.importModuleSpecifier": "relative"
 }

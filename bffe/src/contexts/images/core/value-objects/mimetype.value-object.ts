@@ -1,7 +1,9 @@
-import { invariant } from 'src/shared/building-blocks/invariant';
-import { NonEmptyString } from 'src/shared/building-blocks/non-empty-string.value-object';
-import { ToPrimitives } from 'src/shared/building-blocks/to-primitives';
-import { ValueObject } from 'src/shared/building-blocks/value-object';
+import {
+  invariant,
+  NonEmptyString,
+  ToPrimitives,
+  ValueObject,
+} from '../../../../shared/building-blocks/public_api';
 
 interface MimetypeInput {
   value: NonEmptyString;
