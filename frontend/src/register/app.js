@@ -1,37 +1,34 @@
-import { addToLocalStorage } from '../common/localstorage';
+import { token as tokenService } from '../common/token.service';
 import { ENVIRONMENT } from '../common/const';
+import { sendForm, preventDefault } from '../common/utils';
 
-const HOSTNAME_URL = `${ENVIRONMENT.API_URL}/user/register`;
-
-function sendForm(body) {
-  return fetch(HOSTNAME_URL, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then((response) => response.json());
-}
+const API_URL = `${ENVIRONMENT.API_URL}/user/register`;
 
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
 const nameField = document.getElementById('name');
 
 async function register(event) {
-  event.preventDefault();
+  preventDefault(event);
   let token;
   try {
-    token = await sendForm({
-      email: emailField.value,
-      password: passwordField.value,
-      name: nameField.value,
-    });
+    token = await sendForm(
+      API_URL,
+      {
+        email: emailField.value,
+        password: passwordField.value,
+        name: nameField.value,
+      },
+      'POST'
+    );
   } catch (e) {
     console.error('Couldnt send the form');
     throw e;
   }
-  addToLocalStorage('token', token);
-  window.location.replace('/hub');
+  // TODO: change this into a local storage service and a token service
+  tokenService.set(token);
+  // TODO: change routes :(
+  window.open('/hub');
 }
 
 window.register = register;
