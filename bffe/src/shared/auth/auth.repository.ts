@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { USER_STATUS } from '../consts';
 import { DBConnection } from '../database/db-connection';
 
@@ -16,9 +16,13 @@ export class AuthRepository {
     const user = await this.dbConnection
       .selectFrom('user')
       .where('extId', '=', extId)
-      .where('extId', '=', email)
+      .where('email', '=', email)
       .select(['id', 'name'])
       .executeTakeFirst();
+
+    if (!user) {
+      throw new ForbiddenException();
+    }
 
     return {
       id: user.id,

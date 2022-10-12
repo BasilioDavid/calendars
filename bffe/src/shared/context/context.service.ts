@@ -12,7 +12,6 @@ export class ContextService<T = any> {
   }
 
   get(key: string): T | undefined {
-    return undefined;
     return this.getStorageOrThrow().get(key);
   }
 
