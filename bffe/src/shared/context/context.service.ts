@@ -4,18 +4,19 @@ import { AsyncLocalStorage } from 'async_hooks';
 const als = new AsyncLocalStorage<Map<string, any>>();
 
 @Injectable()
-export class QueryContextService {
+export class ContextService<T = any> {
   run(nextFuction: () => unknown) {
     als.run(new Map<string, any>(), async () => {
       nextFuction();
     });
   }
 
-  get(key: string) {
+  get(key: string): T | undefined {
+    return undefined;
     return this.getStorageOrThrow().get(key);
   }
 
-  set(key: string, value: any) {
+  set(key: string, value: T) {
     this.getStorageOrThrow().set(key, value);
   }
 
