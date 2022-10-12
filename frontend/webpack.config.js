@@ -6,6 +6,8 @@ module.exports = {
     register: './src/register/app.js',
     login: './src/login/app.js',
     deskCalendars: './src/desk-calendar/app.js',
+    hub: './src/hub/app.js',
+    'create-new-calendar': './src/create-new-calendar/app.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
