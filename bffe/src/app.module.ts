@@ -1,12 +1,13 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { CalendarModule } from './contexts/calendars/calendars.module';
 import { ImagesModule } from './contexts/images/images.module';
 import { LivecheckModule } from './contexts/livecheck/livecheck.module';
 import { LoginModule } from './contexts/users/login/login.module';
 import { RegisterModule } from './contexts/users/register/register.module';
 import { AuthModule } from './shared/auth/auth.module';
 import { DatabaseModule } from './shared/database/database.module';
-import { QueryContextMiddleware } from './shared/query-context/query-context.middleware';
-import { QueryContextModule } from './shared/query-context/query-context.module';
+import { ContextMiddleware } from './shared/context/context.middleware';
+import { ContextModule } from './shared/context/context.module';
 
 @Module({
   imports: [
@@ -15,12 +16,13 @@ import { QueryContextModule } from './shared/query-context/query-context.module'
     RegisterModule,
     LoginModule,
     DatabaseModule,
-    QueryContextModule,
+    ContextModule,
     AuthModule,
+    CalendarModule,
   ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(QueryContextMiddleware).forRoutes('*');
+    consumer.apply(ContextMiddleware).forRoutes('*');
   }
 }
