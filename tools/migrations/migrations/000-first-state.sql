@@ -32,9 +32,9 @@ CREATE TABLE calendar (
 );
 
 CREATE TABLE image (
-    id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY ,
-    calendar_id BIGINT UNSIGNED NOT NULL ,
-    file_name VARCHAR(100) UNIQUE NOT NULL,
+    calendar_id BIGINT UNSIGNED NOT NULL,
+    file_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (calendar_id, file_name),
     FOREIGN KEY (calendar_id) REFERENCES calendar(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
