@@ -3,13 +3,18 @@ export function preventDefault(e) {
   e.stopPropagation();
 }
 
-export async function sendForm(url, body, method) {
+export async function sendForm(
+  url,
+  method,
+  body,
+  headers = {
+    'Content-Type': 'application/json',
+  }
+) {
   const response = await fetch(url, {
     method: method,
     body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
   return response.json();
 }

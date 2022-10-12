@@ -12,15 +12,11 @@ async function register(event) {
   preventDefault(event);
   let token;
   try {
-    token = await sendForm(
-      API_URL,
-      {
-        email: emailField.value,
-        password: passwordField.value,
-        name: nameField.value,
-      },
-      'POST'
-    );
+    token = await sendForm(API_URL, 'POST', {
+      email: emailField.value,
+      password: passwordField.value,
+      name: nameField.value,
+    });
   } catch (e) {
     console.error('Couldnt send the form');
     throw e;
