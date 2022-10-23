@@ -17,6 +17,7 @@ export class CalendarRepository {
     userId: number;
     statusId: number;
   }) {
+    // TODO: to different users cannot have a calendar with the same name?
     const nameAlreadyExist = await this.dbConnection
       .selectFrom('calendar')
       .where('name', '=', name)
@@ -39,5 +40,19 @@ export class CalendarRepository {
         },
       ])
       .execute();
+  }
+
+  async getAllCalendars({
+    userId,
+  }: {
+    userId: number;
+  }): Promise<{ extId: string; name: string; statusId: number }[]> {
+    const calendars = await this.dbConnection
+      .selectFrom('calendar')
+      .where('calendar.userId', '=', userId)
+      .select(['extId', 'name', 'statusId'])
+      .execute();
+
+    return calendars;
   }
 }

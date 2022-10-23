@@ -15,5 +15,7 @@ export class CalendarController {
   }
 
   @Get('list')
-  getAll() {}
+  getAll() {
+    return this.calendarService.getAllCalendars();
+  }
 }

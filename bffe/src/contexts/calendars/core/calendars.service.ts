@@ -11,6 +11,7 @@ export class CalendarService {
     private readonly calendarsRepository: CalendarRepository,
     private readonly userService: UserService
   ) {}
+
   async createCalendar({ name }: { name: string }) {
     const params = Calendar.fromPrimitives({
       name,
@@ -18,5 +19,17 @@ export class CalendarService {
       statusId: CALENDAR_STATUS.CREATING,
     }).toPrimitives();
     await this.calendarsRepository.createCalendar(params);
+  }
+
+  getAllCalendars(): Promise<
+    {
+      extId: string;
+      name: string;
+      statusId: number;
+    }[]
+  > {
+    return this.calendarsRepository.getAllCalendars({
+      userId: this.userService.get().id,
+    });
   }
 }
