@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build:webpack": "webpack --config webpack.config.js"
+    "build:webpack": "webpack watch --config webpack.config.js --mode development"
   },
   "devDependencies": {
     "html-loader": "^4.1.0",
