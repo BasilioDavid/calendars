@@ -12,16 +12,15 @@ const nameField = document.getElementById('name');
 
 async function create(e) {
   preventDefault(e);
-  console.log(userToken);
-  await sendForm(
-    API_URL,
-    'POST',
-    { name: nameField.value },
-    {
+  await sendForm({
+    url: API_URL,
+    method: 'POST',
+    body: { name: nameField.value },
+    headers: {
       'Content-Type': 'application/json',
       authorization: userToken,
-    }
-  );
+    },
+  });
 }
 
 window.create = create;
