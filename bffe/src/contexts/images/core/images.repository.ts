@@ -5,7 +5,17 @@ import { DBConnection } from '../../../shared/database/db-connection';
 export class ImagesRepository {
   constructor(private readonly dbConnection: DBConnection) {}
 
-  insertImage(fileName: string) {
+  async insertImage(fileName: string) {
+    const fileNameAlreadyExist = await this.dbConnection
+      .selectFrom('image')
+      .where('fileName', '=', fileName)
+      .select('id')
+      .executeTakeFirst();
+
+    if (fileNameAlreadyExist) {
+      throw new Error('Filename duplicated');
+    }
+
     return this.dbConnection
       .insertInto('image')
       .values({ fileName })
