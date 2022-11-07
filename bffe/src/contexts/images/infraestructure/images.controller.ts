@@ -12,12 +12,12 @@ import { Image } from '../core/image.value-object';
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 @Controller('images')
+@UseGuards(AuthGuard)
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Post('')
   @UseInterceptors(FileInterceptor('photos'))
-  @UseGuards(AuthGuard)
   uploadImage(@UploadedFile() data: Express.Multer.File): void {
     this.imagesService.uploadImage(
       Image.fromPrimitives({
