@@ -3,12 +3,26 @@ version: '3.1'
 
 services:
   db:
-    image: mariadb
+    image: mariadb:10.9.2
+    container_name: calendars-db
     environment:
       MARIADB_ROOT_PASSWORD: example
       MYSQL_ROOT_HOST: '%'
     ports:
       - 3306:3306
+    networks:
+      - intranet
+    volumes:
+    # The :z is added due Selinux
+      - ./data:/var/lib/mysql:z
+  apache:
+    image: httpd:2.4-alpine
+    container_name: calendars-apache
+    ports:
+      - '8080:80'
+    volumes:
+    # The :z is added due Selinux
+    - "../../frontend/dist/src:/usr/local/apache2/htdocs:z"
     networks:
       - intranet
 
