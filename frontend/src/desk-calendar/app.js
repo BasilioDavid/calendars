@@ -1,7 +1,18 @@
+import { unregisteredUserGuard } from '../common/unregistered-user.guard';
 import { ENVIRONMENT } from '../common/const';
-import { preventDefault } from '../common/utils';
+import { sendForm, preventDefault } from '../common/utils';
+import { token } from '../common/token.service';
 
 const API_URL = `${ENVIRONMENT.API_URL}/images`;
+unregisteredUserGuard();
+
+const userToken = token.get();
+const parameters = new URLSearchParams(window.location.search);
+const calendarId = parameters.get('calendarId');
+
+if (typeof calendarId === 'undefined') {
+  window.location.replace('/hub');
+}
 
 const surface = document.getElementById('main');
 class DragNDrop {
@@ -98,7 +109,27 @@ class ImagePrevieRegion {
     reader.readAsDataURL(image);
   }
 
-  uploadImage() {}
+  async uploadImage(image) {
+    try {
+      const formData = new FormData();
+      formData.append('image', image);
+      formData.append('calendarId', calendarId);
+
+      await sendForm({
+        url: API_URL,
+        method: 'POST',
+        body: formData,
+        headers: {
+          // 'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'multipart/form-data',
+          authorization: userToken,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
 }
 
 const test = [];

@@ -16,13 +16,39 @@ form {
   cursor: se-resize;
 }
 
+article {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+article > header > h1 {
+  text-align: center;
+}
+
+main {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
 main > div {
   width: 30rem;
+  height: 500px;
   /* position: relative; */
+}
+
+main > div > * {
+  margin: 0 auto;
+}
+
+main > div > header {
+  text-align: center;
 }
 
 main > div > section {
   height: 100%;
+  /* height: 400px; */
+  width: 400px;
 }
 
 .drop_region {
@@ -32,7 +58,7 @@ main > div > section {
   /* position: absolute; */
 }
 
-/* img {
-  width: 300px;
-  height: 300px;
-} */
+img {
+  max-width: 100%;
+  height: auto;
+}
