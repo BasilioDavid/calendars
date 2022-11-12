@@ -1,4 +1,4 @@
 export interface ImageEntity {
-  id: number;
+  calendarId: number;
   fileName: string;
 }

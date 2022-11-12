@@ -18,16 +18,19 @@ import { Mimetype } from './value-objects/mimetype.value-object';
 // TODO: check size
 interface ImageProps {
   name: UUID;
+  calendarExtId: UUID;
   mimetype: Mimetype;
   buffer: ImageBuffer;
 }
 
 interface ImageFromPrimitives {
+  calendarExtId: string;
   mimetype: string;
   buffer: ImageBuffer;
 }
 
 interface ImagePrimitives {
+  calendarExtId: string;
   name: string;
   buffer: ImageBuffer;
 }
@@ -39,6 +42,7 @@ export class Image
   static fromPrimitives(data: ImageFromPrimitives) {
     return new Image({
       buffer: data.buffer,
+      calendarExtId: UUID.fromPrimitives(data.calendarExtId),
       mimetype: Mimetype.fromPrimitives(data.mimetype),
       name: UUID.fromPrimitives(),
     });
@@ -59,6 +63,7 @@ export class Image
         this.props.mimetype.toPrimitives().split('/')[1]
       }`,
       buffer: this.props.buffer,
+      calendarExtId: this.props.calendarExtId.toPrimitives(),
     };
   }
 }

@@ -13,9 +13,12 @@ export class ImagesService {
     await writeFile(
       //TODO: change this route
       __dirname + '/../../../../../images/' + imageProps.name,
-      imageProps.buffer.buffer,
+      imageProps.buffer.buffer
     );
 
-    await this.imagesRepository.insertImage(imageProps.name);
+    await this.imagesRepository.insertImage({
+      fileName: imageProps.name,
+      calendarExtId: imageProps.calendarExtId,
+    });
   }
 }

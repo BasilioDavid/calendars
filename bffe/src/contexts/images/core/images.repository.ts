@@ -5,20 +5,41 @@ import { DBConnection } from '../../../shared/database/db-connection';
 export class ImagesRepository {
   constructor(private readonly dbConnection: DBConnection) {}
 
-  async insertImage(fileName: string) {
-    const fileNameAlreadyExist = await this.dbConnection
+  async insertImage({
+    fileName,
+    calendarExtId,
+  }: {
+    fileName: string;
+    calendarExtId: string;
+  }): Promise<void> {
+    const fileNameAlreadyExistQuery = this.dbConnection
       .selectFrom('image')
       .where('fileName', '=', fileName)
+      .select('fileName')
+      .executeTakeFirst();
+
+    const calendarQuery = this.dbConnection
+      .selectFrom('calendar')
+      .where('extId', '=', calendarExtId)
       .select('id')
       .executeTakeFirst();
+
+    const [calendar, fileNameAlreadyExist] = await Promise.all([
+      calendarQuery,
+      fileNameAlreadyExistQuery,
+    ]);
 
     if (fileNameAlreadyExist) {
       throw new Error('Filename duplicated');
     }
 
-    return this.dbConnection
+    if (!calendar) {
+      throw new Error('Calendar not found');
+    }
+
+    await this.dbConnection
       .insertInto('image')
-      .values({ fileName })
+      .values({ fileName, calendarId: calendar.id })
       .executeTakeFirstOrThrow();
   }
 }
