@@ -9,7 +9,7 @@ interface MimetypeInput {
   value: NonEmptyString;
 }
 
-const validMimetypes = ['image/jpeg', 'image/x-png'];
+const validMimetypes = ['image/jpeg', 'image/x-png', 'image/png'];
 
 export class Mimetype
   extends ValueObject<MimetypeInput>
