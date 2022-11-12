@@ -24,8 +24,8 @@ async function getCalendars() {
   for (const calendar of calendars) {
     const a = document.createElement('a');
     const li = document.createElement('li');
-    a.dataset.extId = calendar.extId;
-    a.href = DESK_CALENDAR_URL;
+    // a.dataset.extId = calendar.extId;
+    a.href = DESK_CALENDAR_URL + `?calendarId=${calendar.extId}`;
     li.textContent = calendar.name;
     a.appendChild(li);
     ulElement.appendChild(a);
