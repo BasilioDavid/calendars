@@ -5,5 +5,5 @@ export interface UserEntity {
   password: string;
   email: string;
   createAt: string;
-  status_id: number;
+  statusId: number;
 }

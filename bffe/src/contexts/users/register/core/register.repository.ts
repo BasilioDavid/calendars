@@ -34,7 +34,7 @@ export class RegisterRepository {
         email,
         password,
         name,
-        status_id: USER_STATUS['ACTIVATED'],
+        statusId: USER_STATUS['ACTIVATED'],
         extId,
       })
       .execute();
