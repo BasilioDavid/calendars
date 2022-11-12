@@ -1,5 +1,5 @@
 import { token as tokenService } from '../common/token.service';
-import { ENVIRONMENT } from '../common/const';
+import { ENVIRONMENT, ROUTES } from '../common/const';
 import { sendForm, preventDefault } from '../common/utils';
 
 tokenService.clear();
@@ -23,10 +23,8 @@ async function register(event) {
     console.error('Couldnt send the form');
     throw e;
   }
-  // TODO: change this into a local storage service and a token service
   tokenService.set(token);
-  // TODO: change routes :(
-  window.open('/hub', '_self');
+  window.open(ROUTES.hub, '_self');
 }
 
 window.register = register;

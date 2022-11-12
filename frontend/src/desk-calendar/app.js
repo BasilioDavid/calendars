@@ -120,8 +120,6 @@ class ImagePrevieRegion {
         method: 'POST',
         body: formData,
         headers: {
-          // 'Content-Type': 'multipart/form-data',
-          // 'Content-Type': 'multipart/form-data',
           authorization: userToken,
         },
       });
