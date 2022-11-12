@@ -9,6 +9,6 @@ for filename in ./migrations/*; do
 done
 
 #TODO: handle passwords
-docker exec docker_db_1 mysql --user=root --password=example --execute="$sql_script"
+docker exec calendars-db mysql --user=root --password=example --execute="$sql_script"
 
 echo "Migrations done"
