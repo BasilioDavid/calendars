@@ -26,7 +26,6 @@ async function login(event) {
     console.error(e);
     throw e;
   }
-  // TODO: change this into a local storage service and a token service
   tokenService.set(token);
   // TODO: change routes :(
   window.open('/hub', '_self');
