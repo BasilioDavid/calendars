@@ -8,7 +8,7 @@ export function preventDefault(e) {
 export async function sendForm({ url, method, body, headers }) {
   const response = await fetch(url, {
     method: method,
-    body: JSON.stringify(body),
+    body: body instanceof FormData ? body : JSON.stringify(body),
     headers,
   });
   return response.json();
