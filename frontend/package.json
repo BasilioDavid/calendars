@@ -2,9 +2,10 @@
   "name": "frontend",
   "version": "0.0.1",
   "main": "index.js",
-  "license": "MIT",
+  "license": "Copyright",
   "scripts": {
-    "build:webpack": "webpack watch --config webpack.config.js --mode development"
+    "build:webpack": "webpack watch --config webpack.config.js --mode development",
+    "solve-troubleshooting": "sh ../tools/scripts/create-hard-links.sh"
   },
   "devDependencies": {
     "@swc/html": "^0.0.18",

@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     register: './src/register/app.js',
     login: './src/login/app.js',
-    deskCalendars: './src/desk-calendar/app.js',
+    'desk-calendar': './src/desk-calendar/app.js',
     hub: './src/hub/app.js',
     'create-new-calendar': './src/create-new-calendar/app.js',
   },
