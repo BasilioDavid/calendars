@@ -8,7 +8,7 @@ const userToken = token.get();
 
 const API_URL = `${ENVIRONMENT.API_URL}/calendar/list`;
 
-const ulElement = document.querySelector('ul');
+const ulElement = document.querySelector('main ul');
 
 async function getCalendars() {
   const calendars = await sendForm({

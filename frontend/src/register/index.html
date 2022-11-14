@@ -4,18 +4,26 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
 	<title>Login</title>
 </head>
 <body>
-	<form>
-		<label for="name">Nombre</label>
-		<input type="text" name="name" id="name">
-		<label for="email">Email</label>
-		<input type="email" name="email" id="email">
-		<label for="password">Contraseña</label>
-		<input type="text" name="password" id="password">
-		<button onclick="register(event)">Send</button>
-	</form>
+	<article>
+		<header>
+			<h1>Registrarse</h1>
+		</header>
+		<form>
+			<input type="text" name="name" id="name" placeholder="Inserte su nombre completo">
+			<input type="email" name="email" id="email" placeholder="Inserte su email">
+			<input type="password" name="password" id="password" placeholder="Inserte su contraseña">
+			<input type="password" name="password" id="password" placeholder="Vuelva a insertar su contraseña">
+			<button onclick="register(event)">Enviar</button>
+			<div class="action-zone">
+				<a href="/login">¿Ya tienes una cuenta?</a>
+				<a href="/reset-password">¿Olvidaste tu contraseña?</a>
+			</div>
+		</form>
+	</article>
 	<script src="register.js"></script>
 </body>
 </html>

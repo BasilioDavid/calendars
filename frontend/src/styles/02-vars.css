@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+
+:root {
+	--primary: #9375f5;
+	--primary-darker: #594699;
+	--primary-faded: #9375f58a;
+	--secondary: #3D67E0;
+	--secondary-faded: #3d66e0b4;
+	--third-color: #52d0fa9c;
+	--third-color-darker: #255d709c;
+	--third-color-faded: #52d0fa36;
+}
+
+* {
+	font-family: "Noto Sans";
+}

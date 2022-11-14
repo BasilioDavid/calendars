@@ -4,13 +4,28 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../styles/00-index.css">
 	<title>Hub</title>
 </head>
-<body>
-	<h1>Bienvenido al hub</h1>
-	<a href="create-new-calendar">Crear un nuevo calendario</a>
-	<h2>Lista de calendarios previos</h2>
-	<ul></ul>
+<body class="header-aside-main-display">
+	<header>
+		<h1>Calendarios personalizados</h1>
+		<div class="new-logout-links">
+			<a href="/create-new-calendar" class="new">Crear un nuevo calendario</a>
+			<a href="/logout" class="logout">Cerrar sesion</a>
+		</div>
+	</header>
+	<aside>
+		<ul>
+			<li>
+				<a href="/know-more">¿Quien soy?</a>
+			</li>
+		</ul>
+	</aside>
+	<main>
+		<h2 class="title--main">Tus Calendarios</h2>
+		<ul></ul>
+	</main>
 	<script src="hub.js"></script>
 </body>
 </html>
