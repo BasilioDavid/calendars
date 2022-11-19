@@ -1,4 +1,4 @@
-mkdir -p dist/src/{create-new-calendar,desk-calendar,hub,login,register}
+mkdir -p dist/src/{create-new-calendar,desk-calendar,hub,login,register,visualize-calendar}
 cd dist/src
 
 
@@ -25,3 +25,8 @@ cd ..
 cd register
 ln ../../register.js register.js
 ln ../../register.js.map register.js.map 
+
+cd ..
+cd visualize-calendar
+ln ../../visualize-calendar.js visualize-calendar.js
+ln ../../visualize-calendar.js.map visualize-calendar.js.map 
