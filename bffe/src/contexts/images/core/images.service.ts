@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { writeFile } from 'fs/promises';
+import { COMMON_FOLDER } from '../../../shared/consts';
 import { Image } from './image.value-object';
 import { ImagesRepository } from './images.repository';
 
@@ -11,8 +12,7 @@ export class ImagesService {
     const imageProps = image.toPrimitives();
 
     await writeFile(
-      //TODO: change this route
-      __dirname + '/../../../../../images/' + imageProps.name,
+      COMMON_FOLDER + '/images/' + imageProps.name,
       imageProps.buffer.buffer
     );
 

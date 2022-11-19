@@ -12,3 +12,5 @@ export const CALENDAR_STATUS = {
   IN_SHIPPING: 4,
   DELIVERED: 5,
 } as const;
+
+export const COMMON_FOLDER = __dirname + '/../../../common';

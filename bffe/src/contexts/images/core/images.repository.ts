@@ -39,7 +39,7 @@ export class ImagesRepository {
 
     await this.dbConnection
       .insertInto('image')
-      .values({ fileName, calendarId: calendar.id })
+      .values({ fileName, calendarId: calendar.id, monthNumber: 1 })
       .executeTakeFirstOrThrow();
   }
 }
