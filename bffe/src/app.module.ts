@@ -8,6 +8,7 @@ import { AuthModule } from './shared/auth/auth.module';
 import { DatabaseModule } from './shared/database/database.module';
 import { ContextMiddleware } from './shared/context/context.middleware';
 import { ContextModule } from './shared/context/context.module';
+import { GenerateCalendarModule } from './contexts/generate-calendar/images.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ContextModule } from './shared/context/context.module';
     ContextModule,
     AuthModule,
     CalendarModule,
+    GenerateCalendarModule,
   ],
 })
 export class AppModule {

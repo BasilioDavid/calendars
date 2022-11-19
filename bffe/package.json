@@ -24,6 +24,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "canvas": "^2.10.2",
     "jsonwebtoken": "^8.5.1",
     "kysely": "^0.21.3",
     "mariadb": "^3.0.1",

@@ -4,3 +4,4 @@ export * from './non-empty-string.value-object';
 export * from './to-primitives';
 export * from './integer.value-object';
 export * from './uuid.value-object';
+export * from './month.value-object';
