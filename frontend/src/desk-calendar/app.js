@@ -14,6 +14,9 @@ if (typeof calendarId === 'undefined') {
   window.location.replace('/hub');
 }
 
+document.getElementById('generateCalendar').href =
+  '/visualize-calendar?calendarId=' + calendarId;
+
 const surface = document.getElementById('main');
 class DragNDrop {
   constructor(month) {
