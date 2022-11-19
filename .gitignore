@@ -36,5 +36,9 @@ lerna-debug.log*
 
 
 # User Images
-images/*
-!images/.gitkeep
+/common/images/*
+!/common/images/.gitkeep
+
+# templates
+/common/templates/*
+!/common/templates/.gitkeep
