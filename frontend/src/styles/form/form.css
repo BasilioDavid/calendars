@@ -31,6 +31,7 @@
 }
 
 .form-container input[type=password],
+.form-container input:not([type]),
 .form-container input[type=email],
 .form-container button {
 	width: 100%;
@@ -42,6 +43,7 @@
 }
 
 .form-container input[type=password],
+.form-container input:not([type]),
 .form-container input[type=email] {
 	background-color: var(--third-color-faded);
 	border: var(--third-color-darker) 1px solid;
@@ -57,6 +59,7 @@
 }
 
 .form-container input[type=password]:hover,
+.form-container input:not([type]):hover,
 .form-container input[type=email]:hover {
 	background-color: var(--third-color);
 	border: var(--third-color) 1px solid;
