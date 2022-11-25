@@ -11,7 +11,11 @@ export async function sendForm({ url, method, body, headers }) {
     body: body instanceof FormData ? body : JSON.stringify(body),
     headers,
   });
-  return response.json();
+  const contentType = response.headers.get('content-type');
+  if (contentType && contentType.includes('application/json')) {
+    return response.json();
+  }
+  return response.text();
 }
 
 export function clearToken() {
