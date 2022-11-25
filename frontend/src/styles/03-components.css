@@ -5,6 +5,10 @@ body {
 	background-color: var(--primary-faded);
 }
 
+.header-aside-main-display > main.darker-white-bg {
+	background-color: #e2e2e2;
+}
+
 .header-aside-main-display {
 	display: grid;
 	grid-template-columns: 13rem; 
