@@ -12,15 +12,20 @@ const nameField = document.getElementById('name');
 
 async function create(e) {
   preventDefault(e);
-  await sendForm({
-    url: API_URL,
-    method: 'POST',
-    body: { name: nameField.value },
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: userToken,
-    },
-  });
+  try {
+    await sendForm({
+      url: API_URL,
+      method: 'POST',
+      body: { name: nameField.value },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: userToken,
+      },
+    });
+    window.location.href = '/hub';
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 window.create = create;

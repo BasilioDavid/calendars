@@ -5,13 +5,38 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Create new calendars</title>
+	<link rel="stylesheet" href="../styles/00-index.css">
 </head>
-<body>
-	<form>
-		<label for="name">Nombre</label>
-		<input type="text" name="name" id="name">
-		<button onclick="create(event)">Crear</button>
-	</form>
+<body class="header-aside-main-display">
+	<header>
+		<h1>
+			<a href="/hub">
+				Calendarios Personalizados
+			</a>
+		</h1>
+		<div class="new-logout-links">
+			<a href="/create-new-calendar" class="new">Crear un nuevo calendario</a>
+			<a href="/logout" class="logout">Cerrar sesion</a>
+		</div>
+	</header>
+	<aside>
+		<ul>
+			<li>
+				<a href="/know-more">¿Quien soy?</a>
+			</li>
+		</ul>
+	</aside>
+	<main class="darker-white-bg">
+		<article class="form-container">
+			<header>
+				<h1 class="title--main">Crear un nuevo calendario</h1>
+			</header>
+			<form>
+				<input type="text" name="name" id="name" placeholder="Nombre">
+				<button onclick="create(event)">Crear</button>
+			</form>
+		</article>
+	</main>
 	<script src="create-new-calendar.js"></script>
 </body>
 </html>
