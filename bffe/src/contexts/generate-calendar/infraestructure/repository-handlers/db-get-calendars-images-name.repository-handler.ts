@@ -15,19 +15,29 @@ export class DBGetCalendarImagesNameRepositoryHandler extends GetCalendarImagesN
 
   async handle({
     calendarExtId,
+    userId,
   }: GetInputFromRepository<GetCalendarImagesNameRepository>): GetOutputFromRepository<GetCalendarImagesNameRepository> {
-    // TODO: check if the calendar belongs to the calendar
+    const userHasCalendar = await this.dbConnection
+      .selectFrom('calendar')
+      .where('calendar.userId', '=', userId)
+      .select('calendar.id')
+      .executeTakeFirst();
+
+    if (!userHasCalendar) {
+      throw new Error('User has no relation with calendar');
+    }
+
     const images = await this.dbConnection
       .selectFrom('calendar')
       .innerJoin('image', 'image.calendarId', 'calendar.id')
       .where('calendar.extId', '=', calendarExtId)
-      .select(['image.fileName', 'image.monthNumber'])
-      .orderBy('image.monthNumber', 'asc')
+      .select(['image.fileName', 'image.partNumber'])
+      .orderBy('image.partNumber', 'asc')
       .execute();
 
-    return images.map(({ fileName, monthNumber }) => ({
+    return images.map(({ fileName, partNumber }) => ({
       fileName,
-      calendarMonthNumber: monthNumber,
+      calendarMonthNumber: partNumber,
     }));
   }
 }
