@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Month } from '../../../shared/building-blocks/month.value-object';
+import { UserService } from '../../../shared/user/user.service';
 import { GenerateImageService } from '../core/generate-image.service';
 import { GetCalendarImagesNameRepository } from '../core/repositories/get-calendar-images-name.repository';
 import { ImageLoaderRepository } from '../core/repositories/image-loader.repository';
@@ -9,11 +10,15 @@ export class GenerateCalendarService {
   constructor(
     private readonly calendarRepository: GetCalendarImagesNameRepository,
     private readonly imageLoader: ImageLoaderRepository,
+    private readonly userService: UserService,
     private readonly generateImage: GenerateImageService
   ) {}
 
   async generate({ calendarExtId }: { calendarExtId: string }) {
-    const imagesRaw = await this.calendarRepository.handle({ calendarExtId });
+    const imagesRaw = await this.calendarRepository.handle({
+      calendarExtId,
+      userId: this.userService.get().id,
+    });
     const result: Buffer[] = [];
 
     for (const image of imagesRaw) {
