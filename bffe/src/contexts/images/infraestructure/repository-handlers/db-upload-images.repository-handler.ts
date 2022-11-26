@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { DBConnection } from '../../../shared/database/db-connection';
+import { DBConnection } from '../../../../shared/database/db-connection';
+import { UploadImagesRepository } from '../../core/repositories/upload-images.repository';
 
 @Injectable()
-export class ImagesRepository {
-  constructor(private readonly dbConnection: DBConnection) {}
+export class DBUploadImagesRepositoryHandler extends UploadImagesRepository {
+  constructor(private readonly dbConnection: DBConnection) {
+    super();
+  }
 
-  async insertImage({
+  async handle({
     fileName,
     calendarExtId,
     partNumber,

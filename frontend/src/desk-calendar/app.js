@@ -5,6 +5,8 @@ import { token } from '../common/token.service';
 
 const UPLOAD_IMAGES_URL = `${ENVIRONMENT.API_URL}/images`;
 const GET_IMAGES_URL = `${ENVIRONMENT.API_URL}/images/all`;
+const GET_NAME_URL = `${ENVIRONMENT.API_URL}/images/name`;
+
 unregisteredUserGuard();
 
 const userToken = token.get();
@@ -35,7 +37,7 @@ const partsName = [
 
 // [part: string]: {normal: "", thumbnail: ""}
 const partsCached = {};
-async function loadFromServer() {
+async function loadImagesFromServer() {
   let serverImages;
   try {
     const params = new URLSearchParams();
@@ -233,7 +235,28 @@ function main() {
   dragNDrop.addAsidePart(new AsideImagePreviewer(asidesImagesPreviews));
 }
 
+async function loadNameFromServer() {
+  const $title = document.getElementById('calendarTitle');
+
+  try {
+    const params = new URLSearchParams();
+    params.set('calendarId', calendarId);
+    const response = await sendForm({
+      url: GET_NAME_URL + '?' + params.toString(),
+      method: 'GET',
+      headers: {
+        authorization: userToken,
+      },
+    });
+    $title.innerText = response.calendarName;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
 (async function init() {
-  await loadFromServer();
+  loadNameFromServer();
+  await loadImagesFromServer();
   main();
 })();

@@ -3,18 +3,19 @@ import { writeFile } from 'fs/promises';
 import { NonEmptyString } from '../../../shared/building-blocks/non-empty-string.value-object';
 import { COMMON_FOLDER } from '../../../shared/consts';
 import { UserService } from '../../../shared/user/user.service';
-import { Image } from './image.value-object';
-import { ImagesRepository } from './images.repository';
-import { GetCalendarImagesNameRepository } from './repositories/get-calendar-images-name.repository';
-import { ImageLoaderRepository } from './repositories/image-loader.repository';
-import { Blob } from 'buffer';
+import { Image } from '../core/value-objects/image.value-object';
+import { GetCalendarImagesNameRepository } from '../core/repositories/get-calendar-images-name.repository';
+import { ImageLoaderRepository } from '../core/repositories/image-loader.repository';
+import { GetCalendarNameRepository } from '../core/repositories/get-calendar-name.repository';
+import { UploadImagesRepository } from '../core/repositories/upload-images.repository';
 
 @Injectable()
 export class ImagesService {
   constructor(
-    private readonly imagesRepository: ImagesRepository,
+    private readonly uploadImageRepository: UploadImagesRepository,
     private readonly userService: UserService,
     private readonly getCalendarsImagesName: GetCalendarImagesNameRepository,
+    private readonly getCalendarName: GetCalendarNameRepository,
     private readonly imageLoader: ImageLoaderRepository
   ) {}
 
@@ -26,7 +27,7 @@ export class ImagesService {
       imageProps.buffer.buffer
     );
 
-    await this.imagesRepository.insertImage({
+    await this.uploadImageRepository.handle({
       fileName: imageProps.name,
       calendarExtId: imageProps.calendarExtId,
       partNumber: imageProps.partNumber,
@@ -51,5 +52,12 @@ export class ImagesService {
       };
     }
     return imagesGenerated;
+  }
+
+  getName(calendarExtId: NonEmptyString) {
+    return this.getCalendarName.handle({
+      calendarExtId: calendarExtId.toPrimitives(),
+      userId: this.userService.get().id,
+    });
   }
 }

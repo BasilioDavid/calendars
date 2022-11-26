@@ -4,9 +4,9 @@ import {
   ToPrimitives,
   UUID,
   ValueObject,
-} from '../../../shared/building-blocks/public_api';
-import { ImageBuffer } from './value-objects/buffer';
-import { Mimetype } from './value-objects/mimetype.value-object';
+} from '../../../../shared/building-blocks/public_api';
+import { ImageBuffer } from './buffer';
+import { Mimetype } from './mimetype.value-object';
 
 /* {
   fieldname: 'photos',

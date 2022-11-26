@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-import { ImagesService } from '../core/images.service';
-import { Image } from '../core/image.value-object';
+import { ImagesService } from '../application/images.service';
+import { Image } from '../core/value-objects/image.value-object';
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 import { NonEmptyString } from '../../../shared/building-blocks/non-empty-string.value-object';
 
@@ -40,5 +40,12 @@ export class ImagesController {
   @Get('all')
   getAllImages(@Query() { calendarId }: { calendarId: string }): any {
     return this.imagesService.getAll(NonEmptyString.fromPrimitives(calendarId));
+  }
+
+  @Get('name')
+  getCalendarName(@Query() { calendarId }: { calendarId: string }): any {
+    return this.imagesService.getName(
+      NonEmptyString.fromPrimitives(calendarId)
+    );
   }
 }
