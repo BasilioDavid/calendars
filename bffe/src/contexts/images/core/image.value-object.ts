@@ -1,4 +1,5 @@
 import {
+  Integer,
   invariant,
   ToPrimitives,
   UUID,
@@ -21,18 +22,21 @@ interface ImageProps {
   calendarExtId: UUID;
   mimetype: Mimetype;
   buffer: ImageBuffer;
+  partNumber: Integer;
 }
 
 interface ImageFromPrimitives {
   calendarExtId: string;
   mimetype: string;
   buffer: ImageBuffer;
+  partNumber: number;
 }
 
 interface ImagePrimitives {
   calendarExtId: string;
   name: string;
   buffer: ImageBuffer;
+  partNumber: number;
 }
 
 export class Image
@@ -45,6 +49,7 @@ export class Image
       calendarExtId: UUID.fromPrimitives(data.calendarExtId),
       mimetype: Mimetype.fromPrimitives(data.mimetype),
       name: UUID.fromPrimitives(),
+      partNumber: Integer.fromPrimitives(data.partNumber),
     });
   }
 
@@ -64,6 +69,7 @@ export class Image
       }`,
       buffer: this.props.buffer,
       calendarExtId: this.props.calendarExtId.toPrimitives(),
+      partNumber: this.props.partNumber.toPrimitives(),
     };
   }
 }

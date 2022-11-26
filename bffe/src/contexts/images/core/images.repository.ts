@@ -8,9 +8,11 @@ export class ImagesRepository {
   async insertImage({
     fileName,
     calendarExtId,
+    partNumber,
   }: {
     fileName: string;
     calendarExtId: string;
+    partNumber: number;
   }): Promise<void> {
     const fileNameAlreadyExistQuery = this.dbConnection
       .selectFrom('image')
@@ -39,7 +41,7 @@ export class ImagesRepository {
 
     await this.dbConnection
       .insertInto('image')
-      .values({ fileName, calendarId: calendar.id, monthNumber: 1 })
+      .values({ fileName, calendarId: calendar.id, partNumber })
       .executeTakeFirstOrThrow();
   }
 }

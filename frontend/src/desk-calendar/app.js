@@ -3,7 +3,8 @@ import { ENVIRONMENT } from '../common/const';
 import { sendForm, preventDefault } from '../common/utils';
 import { token } from '../common/token.service';
 
-const API_URL = `${ENVIRONMENT.API_URL}/images`;
+const UPLOAD_IMAGES_URL = `${ENVIRONMENT.API_URL}/images`;
+const GET_IMAGES_URL = `${ENVIRONMENT.API_URL}/images/all`;
 unregisteredUserGuard();
 
 const userToken = token.get();
@@ -17,11 +18,88 @@ if (typeof calendarId === 'undefined') {
 document.getElementById('generateCalendar').href =
   '/visualize-calendar?calendarId=' + calendarId;
 
-const surface = document.getElementById('main');
-class DragNDrop {
-  constructor(month) {
-    const imagePreviewRegion = new ImagePrevieRegion(month);
-    const dropRegion = new DropRegion(month, imagePreviewRegion);
+const partsName = [
+  'cover',
+  'january',
+  'febrary',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'november',
+  'december',
+];
+
+// [part: string]: {normal: "", thumbnail: ""}
+const partsCached = {};
+async function loadFromServer() {
+  let serverImages;
+  try {
+    const params = new URLSearchParams();
+    params.set('calendarId', calendarId);
+    const response = await sendForm({
+      url: GET_IMAGES_URL + '?' + params.toString(),
+      method: 'GET',
+      headers: {
+        authorization: userToken,
+      },
+    });
+    serverImages = response;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+  for (const [partNumber, images] of Object.entries(serverImages)) {
+    partsCached[partsName[partNumber]] = images;
+  }
+  console.log(partsCached);
+}
+
+class DragNDropOrchestator {
+  constructor(imagePreviewer, imageUploader, defaultPart) {
+    this.part = defaultPart;
+    this.imagePreviewer = imagePreviewer;
+    this.imageUploader = imageUploader;
+  }
+
+  addAsidePart(asidePartPreviewer) {
+    this.asidePartPreviewer = asidePartPreviewer;
+    this.imagePreviewer.previewImage(partsCached[this.part].normal);
+  }
+
+  async onUpload(files) {
+    for (const file of files) {
+      const processedFile =
+        file instanceof File
+          ? await ImagePreviewer.getBase64FromBlob(file)
+          : file;
+
+      this.imagePreviewer.previewImage(processedFile);
+      this.asidePartPreviewer.addImage(this.part, processedFile);
+      const success = await this.imageUploader.uploadImage(file, this.part);
+      if (!success) {
+        console.error('Something went wrong');
+        // this.imagePreviewer.errorOnUpload();
+      }
+    }
+  }
+
+  switchPart(partName) {
+    this.part = partName;
+    this.imagePreviewer.previewImage(partsCached[partName].normal);
+  }
+}
+
+class AsideImagePreviewer {
+  constructor(partsWithImgPreviewers) {
+    this.partsWithImgPreviewers = partsWithImgPreviewers;
+  }
+
+  addImage(part, image) {
+    this.partsWithImgPreviewers[part].previewImage(image);
   }
 }
 
@@ -34,30 +112,47 @@ class DropRegion {
     return fakeInput;
   }
 
-  constructor(month, imagePreviewRegion) {
-    this.dropRegion = document.createElement('div');
-
-    this.dropRegion.classList.add('drop_region');
-
-    month.appendChild(this.dropRegion);
-
-    this.dropRegion.addEventListener('dragenter', preventDefault, false);
-    this.dropRegion.addEventListener('dragleave', preventDefault, false);
-    this.dropRegion.addEventListener('dragover', preventDefault, false);
-    this.dropRegion.addEventListener('drop', preventDefault, false);
+  constructor(element, onUpload) {
+    element.addEventListener('dragenter', preventDefault, false);
+    element.addEventListener('dragleave', preventDefault, false);
+    element.addEventListener('dragover', preventDefault, false);
+    element.addEventListener('drop', preventDefault, false);
 
     const fakeInput = DropRegion.createFakeInput();
 
-    this.dropRegion.addEventListener('click', () => fakeInput.click());
+    element.addEventListener('click', () => fakeInput.click());
 
     fakeInput.addEventListener('change', () => {
       const files = fakeInput.files;
-      imagePreviewRegion.handleFiles(files);
+      onUpload(files);
     });
   }
 }
 
-class ImagePrevieRegion {
+class ImagePreviewer {
+  static getBase64FromBlob(image) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        resolve(e.target.result);
+      };
+      reader.onerror = (e) => {
+        reject(e);
+      };
+
+      reader.readAsDataURL(image);
+    });
+  }
+  constructor(element) {
+    this.element = element;
+  }
+
+  previewImage(image) {
+    this.element.src = image;
+  }
+}
+
+class ImageUploader {
   static validateImage(image) {
     const validTypes = ['image/png', 'image/jpeg', 'image/bmp', 'image/webp'];
     if (validTypes.indexOf(image.type) === -1) {
@@ -72,54 +167,19 @@ class ImagePrevieRegion {
     return true;
   }
 
-  constructor(month) {
-    this.imagePreviewRegion = document.createElement('div');
-    month.appendChild(this.imagePreviewRegion);
-  }
-
-  handleFiles(files) {
-    for (const file of files) {
-      if (ImagePrevieRegion.validateImage(file))
-        this.previewAndUploadImage(file);
+  async uploadImage(image, part) {
+    if (!ImageUploader.validateImage(image)) {
+      return false;
     }
-  }
 
-  previewAndUploadImage(image) {
-    this.previewImage(image);
-    this.uploadImage(image);
-  }
-
-  previewImage(image) {
-    // container
-    const imgView = document.createElement('div');
-    imgView.className = 'image-view';
-    this.imagePreviewRegion.appendChild(imgView);
-
-    // previewing image
-    const img = document.createElement('img');
-    imgView.appendChild(img);
-
-    // progress overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    imgView.appendChild(overlay);
-
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      img.src = e.target.result;
-    };
-
-    reader.readAsDataURL(image);
-  }
-
-  async uploadImage(image) {
     try {
       const formData = new FormData();
       formData.append('image', image);
       formData.append('calendarId', calendarId);
+      formData.append('partNumber', partsName.indexOf(part));
 
       await sendForm({
-        url: API_URL,
+        url: UPLOAD_IMAGES_URL,
         method: 'POST',
         body: formData,
         headers: {
@@ -130,10 +190,50 @@ class ImagePrevieRegion {
       console.error(e);
       throw e;
     }
+    return true;
   }
 }
 
-const test = [];
-for (const month of surface.children) {
-  test.push(new DragNDrop(month.querySelector('section')));
+const $dropzone = document.getElementById('dropzone');
+const $img = $dropzone.querySelector('img');
+
+const imageUploader = new ImageUploader();
+const imagePreviewer = new ImagePreviewer($img);
+const dragNDrop = new DragNDropOrchestator(
+  imagePreviewer,
+  imageUploader,
+  partsName[0] // cover
+);
+new DropRegion($dropzone, dragNDrop.onUpload.bind(dragNDrop));
+
+function onClickBehaviour(partName, drop) {
+  return (e) => {
+    preventDefault(e);
+    drop.switchPart(partName);
+  };
 }
+
+function main() {
+  const $parts = document.getElementById('parts');
+  const asidesImagesPreviews = {};
+  for (const part of partsName) {
+    const li = document.createElement('li');
+    li.addEventListener('click', onClickBehaviour(part, dragNDrop));
+    const img = document.createElement('img');
+    const imagePreviewer = new ImagePreviewer(img);
+    if (!partsCached[part]) {
+      partsCached[part] = { thumbnail: '', normal: '' };
+    }
+    imagePreviewer.previewImage(partsCached[part].thumbnail);
+    asidesImagesPreviews[part] = imagePreviewer;
+    li.appendChild(img);
+    $parts.appendChild(li);
+  }
+
+  dragNDrop.addAsidePart(new AsideImagePreviewer(asidesImagesPreviews));
+}
+
+(async function init() {
+  await loadFromServer();
+  main();
+})();

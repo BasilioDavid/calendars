@@ -34,7 +34,7 @@ CREATE TABLE calendar (
 CREATE TABLE image (
     calendar_id BIGINT UNSIGNED NOT NULL,
     file_name VARCHAR(100) NOT NULL,
-    month_number TINYINT UNSIGNED NOT NULL,
+    part_number TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (calendar_id, file_name),
     FOREIGN KEY (calendar_id) REFERENCES calendar(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );

@@ -1,38 +1,32 @@
-
-
 .dropzone {
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
-.dropzone > div {
-  width: 30rem;
-  height: 500px;
-}
-
-.dropzone > div > * {
-  margin: 0 auto;
-}
-
-.dropzone > div > header {
-  text-align: center;
-}
-
-.dropzone > div > section {
-  height: 100%;
-  /* height: 400px; */
-  width: 400px;
-}
-
-.drop_region {
-  border: 1px solid red;
-  height: 30rem;
+.dropzone section {
+  border: black 4px solid;
+  border-radius: 50px;
+  grid-area: main;
   width: 100%;
-  /* position: absolute; */
+  height: 60vh;
+  margin: 5rem;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.dropzone section img {
+  width: 100%;
+  height: 100%;
+}
+
+.dropzone aside {
+  grid-area: aside;
+  overflow-y: scroll;
+  width: 20rem;
+  height: 60vh;
+  margin-top: 5rem;
+  /* max-height: 100%; */
+}
+
+.dropzone aside li {
+  height: 6rem;
 }
