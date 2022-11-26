@@ -13,4 +13,8 @@ export const CALENDAR_STATUS = {
   DELIVERED: 5,
 } as const;
 
-export const COMMON_FOLDER = __dirname + '/../../../common';
+const COMMON_FOLDER = __dirname + '/../../../common';
+export const UTIL_FOLDER = {
+  IMAGES: COMMON_FOLDER + '/images',
+  TEMPLATES: COMMON_FOLDER + '/templates',
+};

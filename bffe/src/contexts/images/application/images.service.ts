@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { writeFile } from 'fs/promises';
+
 import { NonEmptyString } from '../../../shared/building-blocks/non-empty-string.value-object';
-import { COMMON_FOLDER } from '../../../shared/consts';
+import { UTIL_FOLDER } from '../../../shared/consts';
 import { UserService } from '../../../shared/user/user.service';
 import { Image } from '../core/value-objects/image.value-object';
 import { GetCalendarImagesNameRepository } from '../core/repositories/get-calendar-images-name.repository';
@@ -23,7 +24,7 @@ export class ImagesService {
     const imageProps = image.toPrimitives();
 
     await writeFile(
-      COMMON_FOLDER + '/images/' + imageProps.name,
+      UTIL_FOLDER.IMAGES + '/' + imageProps.name,
       imageProps.buffer.buffer
     );
 
@@ -48,6 +49,7 @@ export class ImagesService {
       const src = await this.imageLoader.handle({ imageName: fileName });
       // TODO: make a reduce version to thumbnail
       imagesGenerated[calendarMonthNumber] = {
+        // TODO: move this into output VO
         thumbnail: 'data:image/png;base64, ' + src.image.toString('base64'),
         normal: 'data:image/png;base64, ' + src.image.toString('base64'),
       };
