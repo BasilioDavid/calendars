@@ -4,6 +4,7 @@ type ImageLoaderRepositoryInput = {
   fileName: string;
   calendarExtId: string;
   partNumber: number;
+  userId: number;
 };
 
 export abstract class UploadImagesRepository extends Repositoy<

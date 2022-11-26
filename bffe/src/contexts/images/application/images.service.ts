@@ -31,6 +31,7 @@ export class ImagesService {
       fileName: imageProps.name,
       calendarExtId: imageProps.calendarExtId,
       partNumber: imageProps.partNumber,
+      userId: this.userService.get().id,
     });
   }
 

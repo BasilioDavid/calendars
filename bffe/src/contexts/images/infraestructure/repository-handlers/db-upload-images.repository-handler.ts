@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { DBConnection } from '../../../../shared/database/db-connection';
+import {
+  GetInputFromRepository,
+  GetOutputFromRepository,
+} from '../../../../shared/utils/get-from-repository';
 import { UploadImagesRepository } from '../../core/repositories/upload-images.repository';
 
 @Injectable()
@@ -12,11 +16,8 @@ export class DBUploadImagesRepositoryHandler extends UploadImagesRepository {
     fileName,
     calendarExtId,
     partNumber,
-  }: {
-    fileName: string;
-    calendarExtId: string;
-    partNumber: number;
-  }): Promise<void> {
+    userId,
+  }: GetInputFromRepository<UploadImagesRepository>): GetOutputFromRepository<UploadImagesRepository> {
     const fileNameAlreadyExistQuery = this.dbConnection
       .selectFrom('image')
       .where('fileName', '=', fileName)
@@ -26,6 +27,7 @@ export class DBUploadImagesRepositoryHandler extends UploadImagesRepository {
     const calendarQuery = this.dbConnection
       .selectFrom('calendar')
       .where('extId', '=', calendarExtId)
+      .where('calendar.userId', '=', userId)
       .select('id')
       .executeTakeFirst();
 
@@ -34,6 +36,7 @@ export class DBUploadImagesRepositoryHandler extends UploadImagesRepository {
       fileNameAlreadyExistQuery,
     ]);
 
+    //TODO: handle this error in a diferent way
     if (fileNameAlreadyExist) {
       throw new Error('Filename duplicated');
     }
@@ -42,9 +45,25 @@ export class DBUploadImagesRepositoryHandler extends UploadImagesRepository {
       throw new Error('Calendar not found');
     }
 
-    await this.dbConnection
-      .insertInto('image')
-      .values({ fileName, calendarId: calendar.id, partNumber })
-      .executeTakeFirstOrThrow();
+    const partImageAlreadyExist = await this.dbConnection
+      .selectFrom('image')
+      .where('calendarId', '=', calendar.id)
+      .where('partNumber', '=', partNumber)
+      .select('image.fileName')
+      .executeTakeFirst();
+
+    if (partImageAlreadyExist) {
+      await this.dbConnection
+        .updateTable('image')
+        .set({ fileName })
+        .where('calendarId', '=', calendar.id)
+        .where('partNumber', '=', partNumber)
+        .execute();
+    } else {
+      await this.dbConnection
+        .insertInto('image')
+        .values({ fileName, calendarId: calendar.id, partNumber })
+        .execute();
+    }
   }
 }
