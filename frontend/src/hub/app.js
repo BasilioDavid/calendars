@@ -19,7 +19,6 @@ async function getCalendars() {
       authorization: userToken,
     },
   });
-  console.log(calendars);
   for (const calendar of calendars) {
     const a = document.createElement('a');
     const li = document.createElement('li');
