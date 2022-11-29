@@ -1,17 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { Month } from '../../../shared/building-blocks/month.value-object';
+import { Part } from '../../../shared/building-blocks/part.value-object';
+import { ImageDecorator } from '../../../shared/image-decorators/image-decorator';
 import { UserService } from '../../../shared/user/user.service';
-import { GenerateImageService } from '../core/generate-image.service';
+import { CoverImageDecorator } from '../core/image-decorators/cover.image-decorator';
+import { MinifierImageDecorator } from '../core/image-decorators/minifier.image-decorator';
+import { MonthImageDecorator } from '../core/image-decorators/month.image-decorator';
 import { GetCalendarImagesNameRepository } from '../core/repositories/get-calendar-images-name.repository';
 import { ImageLoaderRepository } from '../core/repositories/image-loader.repository';
 
 @Injectable()
 export class GenerateCalendarService {
+  private partFactory: { [K: number]: ImageDecorator } = {
+    0: new CoverImageDecorator(),
+    1: new MonthImageDecorator(1),
+    2: new MonthImageDecorator(2),
+    3: new MonthImageDecorator(3),
+    4: new MonthImageDecorator(4),
+    5: new MonthImageDecorator(5),
+    6: new MonthImageDecorator(6),
+    7: new MonthImageDecorator(7),
+    8: new MonthImageDecorator(8),
+    9: new MonthImageDecorator(9),
+    10: new MonthImageDecorator(10),
+    11: new MonthImageDecorator(11),
+    12: new MonthImageDecorator(12),
+  };
   constructor(
     private readonly calendarRepository: GetCalendarImagesNameRepository,
     private readonly imageLoader: ImageLoaderRepository,
-    private readonly userService: UserService,
-    private readonly generateImage: GenerateImageService
+    private readonly userService: UserService
   ) {}
 
   async generate({ calendarExtId }: { calendarExtId: string }) {
@@ -21,19 +38,19 @@ export class GenerateCalendarService {
     });
     const result: Buffer[] = [];
 
+    const minifier = new MinifierImageDecorator();
     for (const image of imagesRaw) {
-      const month = Month.fromPrimives({
+      const part = Part.fromPrimives({
         number: image.calendarMonthNumber,
       }).toPrimitives();
       const buffers = await this.imageLoader.handle({
         imageName: image.fileName,
-        templateName: month.name,
       });
-      const imageProcessed = await this.generateImage.generate({
-        image: buffers.image,
-        template: buffers.template,
-      });
-      result.push(imageProcessed);
+      const imageProcessed = await this.partFactory[part.number].decorate(
+        buffers.image
+      );
+      const imageMinified = await minifier.decorate(imageProcessed);
+      result.push(imageMinified);
     }
 
     return result.map((calendar) => calendar.toString('base64'));

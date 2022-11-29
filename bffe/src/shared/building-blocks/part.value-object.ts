@@ -3,7 +3,8 @@ import { invariant } from './invariant';
 import { ToPrimitives } from './to-primitives';
 import { ValueObject } from './value-object';
 
-const monthNumberToText = {
+const partNumberToText = {
+  0: 'Cover',
   1: 'January',
   2: 'Febrary',
   3: 'March',
@@ -18,44 +19,44 @@ const monthNumberToText = {
   12: 'December',
 };
 
-interface MonthProp {
+interface PartProp {
   number: Integer;
 }
 
-interface MonthFromPrimitives {
+interface PartFromPrimitives {
   number: number;
 }
 
-interface MonthToPrimitives {
+interface PartToPrimitives {
   number: number;
   name: string;
 }
 
-export class Month
-  extends ValueObject<MonthProp>
-  implements ToPrimitives<MonthToPrimitives>
+export class Part
+  extends ValueObject<PartProp>
+  implements ToPrimitives<PartToPrimitives>
 {
-  static fromPrimives(value: MonthFromPrimitives): Month {
-    return new Month({ number: Integer.fromPrimitives(value.number) });
+  static fromPrimives(value: PartFromPrimitives): Part {
+    return new Part({ number: Integer.fromPrimitives(value.number) });
   }
 
-  private constructor(props: MonthProp) {
+  private constructor(props: PartProp) {
     const monthNumber = props.number.toPrimitives();
     invariant(
-      'Month cannot be greater or equeal than 12, currently ' + monthNumber,
+      'Part cannot be greater or equeal than 12, currently ' + monthNumber,
       monthNumber <= 12
     );
     invariant(
-      'Month cannot be lower or equal than 1, currently ' + monthNumber,
-      1 <= monthNumber
+      'Part cannot be lower or equal than 0, currently ' + monthNumber,
+      0 <= monthNumber
     );
     super(props);
   }
 
-  toPrimitives(): MonthToPrimitives {
+  toPrimitives(): PartToPrimitives {
     return {
       number: this.props.number.toPrimitives(),
-      name: monthNumberToText[this.props.number.toPrimitives()],
+      name: partNumberToText[this.props.number.toPrimitives()],
     };
   }
 }

@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 
 import { AuthModule } from '../../shared/auth/auth.module';
 import { GenerateCalendarService } from './application/generate-calendar.service';
-import { GenerateImageService } from './core/generate-image.service';
 import { GetCalendarImagesNameRepository } from './core/repositories/get-calendar-images-name.repository';
 import { ImageLoaderRepository } from './core/repositories/image-loader.repository';
 import { CalendarController } from './infraestructure/calendar.controller';
@@ -21,7 +20,6 @@ import { HddImageLoaderRepositoryHandler } from './infraestructure/repository-ha
       provide: ImageLoaderRepository,
       useClass: HddImageLoaderRepositoryHandler,
     },
-    GenerateImageService,
     GenerateCalendarService,
   ],
 })
