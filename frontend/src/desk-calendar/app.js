@@ -21,7 +21,6 @@ document.getElementById('generateCalendar').href =
   '/visualize-calendar?calendarId=' + calendarId;
 
 const partsName = [
-  'cover',
   'january',
   'febrary',
   'march',
@@ -200,7 +199,7 @@ const imagePreviewer = new ImagePreviewer($img);
 const dragNDrop = new DragNDropOrchestator(
   imagePreviewer,
   imageUploader,
-  partsName[0] // cover
+  partsName[0]
 );
 new DropRegion($dropzone, dragNDrop.onUpload.bind(dragNDrop));
 
@@ -220,7 +219,10 @@ function main() {
     const img = document.createElement('img');
     const imagePreviewer = new ImagePreviewer(img);
     if (!partsCached[part]) {
-      partsCached[part] = { thumbnail: '', normal: '' };
+      partsCached[part] = {
+        normal: '/resources/utils/insert-here.png',
+        thumbnail: '',
+      };
     }
     imagePreviewer.previewImage(partsCached[part].thumbnail);
     asidesImagesPreviews[part] = imagePreviewer;
