@@ -12,6 +12,7 @@ import { UploadImagesRepository } from '../core/repositories/upload-images.repos
 import { MinifierToSaveImageDecorator } from '../core/image-decorators/minifier-to-save.image-decorator';
 import { MinifierToThumbnailImageDecorator } from '../core/image-decorators/minifier-to-thumbnail.image-decorator';
 import { MinifierToNormalImageDecorator } from '../core/image-decorators/minifier-to-normal.image-decorator';
+import { ImageWritterImagesRepository } from '../core/repositories/image-writter.repository';
 
 @Injectable()
 export class ImagesService {
@@ -20,7 +21,8 @@ export class ImagesService {
     private readonly userService: UserService,
     private readonly getCalendarsImagesName: GetCalendarImagesNameRepository,
     private readonly getCalendarName: GetCalendarNameRepository,
-    private readonly imageLoader: ImageLoaderRepository
+    private readonly imageLoader: ImageLoaderRepository,
+    private readonly imageWritter: ImageWritterImagesRepository
   ) {}
 
   async uploadImage(image: Image) {
@@ -44,7 +46,10 @@ export class ImagesService {
       imageThumbnailPromise,
     ]);
 
-    await writeFile(UTIL_FOLDER.IMAGES + '/' + imageProps.name, processedImg);
+    await this.imageWritter.handle({
+      fileName: imageProps.name,
+      file: processedImg,
+    });
 
     await this.uploadImageRepository.handle({
       fileName: imageProps.name,
