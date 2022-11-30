@@ -18,6 +18,7 @@ CREATE TABLE user (
     createAt DATETIME NOT NULL DEFAULT NOW(),
     status_id INTEGER NOT NULL ,
     UNIQUE KEY key_ext_id (ext_id) ,
+    UNIQUE KEY key_email (email) ,
     PRIMARY KEY (id),
     FOREIGN KEY user(status_id) REFERENCES user_status(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -39,3 +40,14 @@ CREATE TABLE image (
     FOREIGN KEY (calendar_id) REFERENCES calendar(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+CREATE TABLE `order` (
+	id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+	postal_code char(5) NOT NULL,
+	city varchar(255) NOT NULL,
+    contact_number INT NOT NULL,
+	direction varchar(255) NOT NULL,
+	specitfications varchar(255) NULL,
+	instructions text NULL,
+	calendar_id BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY (calendar_id) REFERENCES calendar(id)
+);
