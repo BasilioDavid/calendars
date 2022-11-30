@@ -11,6 +11,8 @@ import { HddImageLoaderRepositoryHandler } from './infraestructure/repository-ha
 import { GetCalendarNameRepository } from './core/repositories/get-calendar-name.repository';
 import { UploadImagesRepository } from './core/repositories/upload-images.repository';
 import { DBUploadImagesRepositoryHandler } from './infraestructure/repository-handlers/db-upload-images.repository-handler';
+import { ImageWritterImagesRepository } from './core/repositories/image-writter.repository';
+import { HddImageWritterRepositoryHandler } from './infraestructure/repository-handlers/hdd-image-writter.repository-handler';
 
 @Module({
   imports: [AuthModule],
@@ -32,6 +34,10 @@ import { DBUploadImagesRepositoryHandler } from './infraestructure/repository-ha
     {
       provide: ImageLoaderRepository,
       useClass: HddImageLoaderRepositoryHandler,
+    },
+    {
+      provide: ImageWritterImagesRepository,
+      useClass: HddImageWritterRepositoryHandler,
     },
   ],
 })
