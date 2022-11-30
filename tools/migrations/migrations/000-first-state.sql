@@ -47,6 +47,8 @@ CREATE TABLE `order` (
     contact_number INT NOT NULL,
 	direction varchar(255) NOT NULL,
 	specitfications varchar(255) NULL,
+    orderedAt TIMESTAMP NOT NULL,
+    deliveredAt TIMESTAMP NULL,
 	instructions text NULL,
 	calendar_id BIGINT UNSIGNED NOT NULL,
 	FOREIGN KEY (calendar_id) REFERENCES calendar(id)
