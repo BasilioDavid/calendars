@@ -8,8 +8,8 @@ export class MinifierImageDecorator extends ImageDecorator {
 
   async decorate(image: Buffer): Promise<Buffer> {
     const imageLoaded = await loadImage(image);
-    const returnHeight = imageLoaded.height * 0.25;
-    const returnWidth = imageLoaded.width * 0.25;
+    const returnHeight = imageLoaded.height * 0.15;
+    const returnWidth = imageLoaded.width * 0.15;
 
     const canvas = createCanvas(returnWidth, returnHeight);
     const ctx = canvas.getContext('2d');
