@@ -27,7 +27,6 @@ async function login(event) {
     throw e;
   }
   tokenService.set(token);
-  // TODO: change routes :(
   window.open('/hub', '_self');
 }
 

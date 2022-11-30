@@ -1,12 +1,13 @@
 .form-container {
-	margin: 8rem auto;
+	margin: 5rem auto;
 	padding: 1rem 5rem 4rem 5rem;
 	border-radius: 50px;
 	display: flex;
 	flex: 1;
 	max-width: 100%;
 	width: 40rem;
-	height: 40rem;
+	min-height: 40rem;
+	height: fit-content;
 	background-color: white;
 	flex-direction: column;
 	gap: 2rem;
@@ -15,7 +16,6 @@
 
 
 .form-container form {
-	height: fit-content;
 	display: flex;
 	width: 100%;
 	flex: 1;
@@ -31,6 +31,7 @@
 }
 
 .form-container input[type=password],
+.form-container input[type=number],
 .form-container input:not([type]),
 .form-container input[type=email],
 .form-container button {
@@ -43,6 +44,7 @@
 }
 
 .form-container input[type=password],
+.form-container input[type=number],
 .form-container input:not([type]),
 .form-container input[type=email] {
 	background-color: var(--third-color-faded);
@@ -59,6 +61,7 @@
 }
 
 .form-container input[type=password]:hover,
+.form-container input[type=number]:hover,
 .form-container input:not([type]):hover,
 .form-container input[type=email]:hover {
 	background-color: var(--third-color);
@@ -90,7 +93,7 @@
 	justify-content: space-between;
 }
 
-.form-container .remember label {
+.form-container .clickable label {
 	user-select: none;
 	cursor: pointer;
 }
