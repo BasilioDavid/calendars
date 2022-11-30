@@ -1,4 +1,4 @@
-mkdir -p dist/src/{create-new-calendar,desk-calendar,hub,login,register,visualize-calendar}
+mkdir -p dist/src/{create-new-calendar,desk-calendar,hub,login,register,visualize-calendar,order-calendar}
 cd dist/src
 
 
@@ -30,3 +30,9 @@ cd ..
 cd visualize-calendar
 ln ../../visualize-calendar.js visualize-calendar.js
 ln ../../visualize-calendar.js.map visualize-calendar.js.map 
+
+
+cd ..
+cd order-calendar
+ln ../../order-calendar.js order-calendar.js
+ln ../../order-calendar.js.map order-calendar.js.map 

@@ -13,6 +13,7 @@ module.exports = {
     'desk-calendar': './src/desk-calendar/app.js',
     hub: './src/hub/app.js',
     'create-new-calendar': './src/create-new-calendar/app.js',
+    'order-calendar': './src/order-calendar/app.js',
   },
   output: {},
   devtool: 'source-map',
@@ -38,6 +39,11 @@ module.exports = {
         {
           context: path.resolve(__dirname),
           from: './src/**/*.css',
+        },
+
+        {
+          context: path.resolve(__dirname),
+          from: './src/**/*.png',
         },
       ],
     }),
