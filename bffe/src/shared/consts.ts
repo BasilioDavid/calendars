@@ -18,3 +18,5 @@ export const UTIL_FOLDER = {
   IMAGES: COMMON_FOLDER + '/images',
   TEMPLATES: COMMON_FOLDER + '/templates',
 };
+
+export const MYSQL_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx'Z'";
