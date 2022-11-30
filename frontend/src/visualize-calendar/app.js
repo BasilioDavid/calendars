@@ -14,7 +14,7 @@ if (typeof calendarId === 'undefined') {
   window.location.replace('/hub');
 }
 
-const ul = document.getElementById('images');
+const $article = document.getElementById('images');
 
 async function init() {
   try {
@@ -27,11 +27,18 @@ async function init() {
       },
     });
     for (const image of images) {
-      const li = document.createElement('li');
+      const div = document.createElement('div');
+      const header = document.createElement('header');
       const img = document.createElement('img');
+      const section = document.createElement('section');
+      const p = document.createElement('p');
+      p.textContent = 'Enero';
       img.src = 'data:image/png;base64, ' + image;
-      li.appendChild(img);
-      ul.appendChild(li);
+      header.appendChild(img);
+      section.appendChild(p);
+      div.appendChild(header);
+      div.append(section);
+      $article.appendChild(div);
     }
   } catch (e) {
     console.error(e);
