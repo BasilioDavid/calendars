@@ -26,8 +26,8 @@ export class ImagesController {
     @UploadedFile() data: Express.Multer.File,
     @Body()
     { calendarId, partNumber }: { calendarId: string; partNumber: number }
-  ): void {
-    this.imagesService.uploadImage(
+  ): unknown {
+    return this.imagesService.uploadImage(
       Image.fromPrimitives({
         buffer: data,
         mimetype: data.mimetype,

@@ -9,6 +9,9 @@ import { GetCalendarImagesNameRepository } from '../core/repositories/get-calend
 import { ImageLoaderRepository } from '../core/repositories/image-loader.repository';
 import { GetCalendarNameRepository } from '../core/repositories/get-calendar-name.repository';
 import { UploadImagesRepository } from '../core/repositories/upload-images.repository';
+import { MinifierToSaveImageDecorator } from '../core/image-decorators/minifier-to-save.image-decorator';
+import { MinifierToThumbnailImageDecorator } from '../core/image-decorators/minifier-to-thumbnail.image-decorator';
+import { MinifierToNormalImageDecorator } from '../core/image-decorators/minifier-to-normal.image-decorator';
 
 @Injectable()
 export class ImagesService {
@@ -23,10 +26,25 @@ export class ImagesService {
   async uploadImage(image: Image) {
     const imageProps = image.toPrimitives();
 
-    await writeFile(
-      UTIL_FOLDER.IMAGES + '/' + imageProps.name,
+    const processedImgPromise = new MinifierToSaveImageDecorator().decorate(
       imageProps.buffer.buffer
     );
+    const imageNormalPromise =
+      await new MinifierToNormalImageDecorator().decorate(
+        imageProps.buffer.buffer
+      );
+    const imageThumbnailPromise =
+      await new MinifierToThumbnailImageDecorator().decorate(
+        imageProps.buffer.buffer
+      );
+
+    const [processedImg, imageNormal, imageThumbnail] = await Promise.all([
+      processedImgPromise,
+      imageNormalPromise,
+      imageThumbnailPromise,
+    ]);
+
+    await writeFile(UTIL_FOLDER.IMAGES + '/' + imageProps.name, processedImg);
 
     await this.uploadImageRepository.handle({
       fileName: imageProps.name,
@@ -34,6 +52,12 @@ export class ImagesService {
       partNumber: imageProps.partNumber,
       userId: this.userService.get().id,
     });
+
+    // TODO: move this into output VO
+    return {
+      thumbnail: 'data:image/png;base64, ' + imageThumbnail.toString('base64'),
+      normal: 'data:image/png;base64, ' + imageNormal.toString('base64'),
+    };
   }
 
   async getAll(calendarExtId: NonEmptyString) {
@@ -47,11 +71,21 @@ export class ImagesService {
 
     for (const { calendarMonthNumber, fileName } of calendarImages) {
       const src = await this.imageLoader.handle({ imageName: fileName });
-      // TODO: make a reduce version to thumbnail
+      const imageNormalPromise =
+        await new MinifierToNormalImageDecorator().decorate(src.image);
+      const imageThumbnailPromise =
+        await new MinifierToThumbnailImageDecorator().decorate(src.image);
+
+      const [imageNormal, imageThumbnail] = await Promise.all([
+        imageNormalPromise,
+        imageThumbnailPromise,
+      ]);
+
       imagesGenerated[calendarMonthNumber] = {
         // TODO: move this into output VO
-        thumbnail: 'data:image/png;base64, ' + src.image.toString('base64'),
-        normal: 'data:image/png;base64, ' + src.image.toString('base64'),
+        thumbnail:
+          'data:image/png;base64, ' + imageThumbnail.toString('base64'),
+        normal: 'data:image/png;base64, ' + imageNormal.toString('base64'),
       };
     }
     return imagesGenerated;
