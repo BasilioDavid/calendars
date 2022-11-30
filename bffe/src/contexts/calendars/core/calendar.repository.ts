@@ -17,7 +17,6 @@ export class CalendarRepository {
     userId: number;
     statusId: number;
   }) {
-    // TODO: to different users cannot have a calendar with the same name?
     const nameAlreadyExist = await this.dbConnection
       .selectFrom('calendar')
       .where('name', '=', name)
