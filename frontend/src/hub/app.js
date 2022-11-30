@@ -8,7 +8,7 @@ const userToken = token.get();
 
 const API_URL = `${ENVIRONMENT.API_URL}/calendar/list`;
 
-const ulElement = document.querySelector('main ul');
+const $article = document.querySelector('article');
 
 async function getCalendars() {
   const calendars = await sendForm({
@@ -21,11 +21,18 @@ async function getCalendars() {
   });
   for (const calendar of calendars) {
     const a = document.createElement('a');
-    const li = document.createElement('li');
+    const header = document.createElement('header');
+    const section = document.createElement('section');
+    const span1 = document.createElement('span');
+    span1.textContent = calendar.name;
+    const span = document.createElement('span');
+    span.textContent = calendar.statusId;
     a.href = ROUTES.deskCalendar + `?calendarId=${calendar.extId}`;
-    li.textContent = calendar.name;
-    a.appendChild(li);
-    ulElement.appendChild(a);
+    a.appendChild(header);
+    a.appendChild(section);
+    section.appendChild(span1);
+    section.appendChild(span);
+    $article.appendChild(a);
   }
 }
 
