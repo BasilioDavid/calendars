@@ -57,7 +57,6 @@ async function loadImagesFromServer() {
   for (const [partNumber, images] of Object.entries(serverImages)) {
     partsCached[partsName[partNumber]] = images;
   }
-  console.log(partsCached);
 }
 
 class DragNDropOrchestator {
@@ -74,18 +73,15 @@ class DragNDropOrchestator {
 
   async onUpload(files) {
     for (const file of files) {
-      const processedFile =
-        file instanceof File
-          ? await ImagePreviewer.getBase64FromBlob(file)
-          : file;
-
-      this.imagePreviewer.previewImage(processedFile);
-      this.asidePartPreviewer.addImage(this.part, processedFile);
-      const success = await this.imageUploader.uploadImage(file, this.part);
-      if (!success) {
-        console.error('Something went wrong');
-        // this.imagePreviewer.errorOnUpload();
+      const processedFile = await this.imageUploader.uploadImage(
+        file,
+        this.part
+      );
+      if (typeof processedFile === 'undefined') {
+        return;
       }
+      this.asidePartPreviewer.addImage(this.part, processedFile.thumbnail);
+      this.imagePreviewer.previewImage(processedFile.normal);
     }
   }
 
@@ -171,7 +167,7 @@ class ImageUploader {
 
   async uploadImage(image, part) {
     if (!ImageUploader.validateImage(image)) {
-      return false;
+      return undefined;
     }
 
     try {
@@ -180,7 +176,7 @@ class ImageUploader {
       formData.append('calendarId', calendarId);
       formData.append('partNumber', partsName.indexOf(part));
 
-      await sendForm({
+      const data = sendForm({
         url: UPLOAD_IMAGES_URL,
         method: 'POST',
         body: formData,
@@ -188,11 +184,11 @@ class ImageUploader {
           authorization: userToken,
         },
       });
+      return data;
     } catch (e) {
       console.error(e);
       throw e;
     }
-    return true;
   }
 }
 
