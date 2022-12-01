@@ -17,6 +17,6 @@ export class LoginService {
       email: userProps.email,
       extId,
     });
-    return { token: `Bearer ${rawToken}` };
+    return { token: `Bearer ${rawToken.token}` };
   }
 }
