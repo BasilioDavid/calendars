@@ -1,6 +1,7 @@
 @import url("./form/form.css");
 @import url("./dropzone/dropzone.css");
 @import url("./cards/cards.css");
+@import url("./toast/toast.css");
 
 body {
 	background-color: var(--primary-faded);

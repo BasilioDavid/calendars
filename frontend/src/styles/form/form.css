@@ -75,7 +75,7 @@
 	color: white;
 }
 
-.form-container button:hover {
+.form-container button:hover,.form-container button:disabled {
 	background-color: var(--secondary-faded);
 	border: var(--secondary-faded) 1px solid;
 }
