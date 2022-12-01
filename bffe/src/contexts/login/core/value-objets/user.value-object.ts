@@ -3,7 +3,7 @@ import {
   NonEmptyString,
   ToPrimitives,
   ValueObject,
-} from '../../../../../shared/building-blocks/public_api';
+} from '../../../../shared/building-blocks/public_api';
 
 interface UserProps {
   password: NonEmptyString;

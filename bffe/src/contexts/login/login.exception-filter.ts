@@ -1,5 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
-import { ErrorResponse } from '../../../shared/errors/error-respones.service';
+import { ErrorResponse } from '../../shared/errors/error-respones.service';
 
 @Catch()
 export class LoginExceptionFilter implements ExceptionFilter {

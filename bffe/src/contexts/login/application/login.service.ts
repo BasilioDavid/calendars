@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { TokenService } from '../../shared/token.service';
-import { LoginRepository } from './login.repository';
-import { User } from './value-objets/user.value-object';
+import { LoginUserRepository } from '../core/repositories/login.repository';
+import { User } from '../core/value-objets/user.value-object';
 
 @Injectable()
 export class LoginService {
   constructor(
-    private readonly userRepository: LoginRepository,
+    private readonly userRepository: LoginUserRepository,
     private readonly tokenService: TokenService
   ) {}
 
