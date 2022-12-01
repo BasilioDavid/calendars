@@ -1,6 +1,4 @@
-mkdir -p dist/src/{create-new-calendar,desk-calendar,hub,login,register,visualize-calendar,order-calendar}
 cd dist/src
-
 
 cd create-new-calendar
 ln ../../create-new-calendar.js create-new-calendar.js

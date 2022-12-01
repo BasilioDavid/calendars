@@ -20,6 +20,10 @@ import { LoginExceptionFilter } from './login.exception-filter';
       provide: GenerateTokenRepository,
       useClass: DbGenerateTokenRepositoryHandler,
     },
+    {
+      provide: GenerateTokenRepository,
+      useClass: DbGenerateTokenRepositoryHandler,
+    },
   ],
 })
 export class LoginModule {}
