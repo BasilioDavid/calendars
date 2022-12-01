@@ -2,6 +2,7 @@ import { unregisteredUserGuard } from '../common/unregistered-user.guard';
 import { sendForm, preventDefault } from '../common/utils';
 import { ENVIRONMENT, ROUTES } from '../common/const';
 import { token } from '../common/token.service';
+import { generateErrorToast, generateSuccessToast } from '../common/toast';
 
 unregisteredUserGuard();
 const userToken = token.get();
@@ -36,4 +37,14 @@ async function getCalendars() {
   }
 }
 
+function checkUrlParams() {
+  const parameters = new URLSearchParams(window.location.search);
+  if (parameters.get('login')) {
+    generateSuccessToast('Inicio de sesión realizado con éxito');
+  }
+  if (parameters.get('order')) {
+    generateSuccessToast('Calendario pedido con éxito');
+  }
+}
+void checkUrlParams();
 getCalendars();
