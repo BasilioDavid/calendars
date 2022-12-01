@@ -23,8 +23,4 @@ import { GenerateCalendarModule } from './contexts/generate-calendar/images.modu
     GenerateCalendarModule,
   ],
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ContextMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}
