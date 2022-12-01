@@ -12,19 +12,23 @@ const nameField = document.getElementById('name');
 
 async function register(event) {
   preventDefault(event);
-  let token;
-  try {
-    token = await sendForm(API_URL, 'POST', {
-      email: emailField.value,
-      password: passwordField.value,
-      name: nameField.value,
-    });
-  } catch (e) {
-    console.error('Couldnt send the form');
-    throw e;
+  const token = await sendForm(API_URL, 'POST', {
+    email: emailField.value,
+    password: passwordField.value,
+    name: nameField.value,
+  });
+  if (typeof token.errorCode !== 'undefined') {
+    errorHandling(token);
+  } else {
+    tokenService.set(token);
+    window.open(`${ROUTES.hub}/hub?register=true`, '_self');
   }
-  tokenService.set(token);
-  window.open(ROUTES.hub, '_self');
+}
+
+function errorHandling(error) {
+  console.log('mostrando error de no usuario');
+  if (error.errorCode === 'USERNOTFOUND')
+    generateErrorToast('Combinación de Usuario y contraseña erronea');
 }
 
 window.register = register;

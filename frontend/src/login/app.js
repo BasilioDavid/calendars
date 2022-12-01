@@ -1,7 +1,7 @@
-import { ENVIRONMENT } from '../common/const';
+import { ENVIRONMENT, ROUTES } from '../common/const';
 import { token as tokenService } from '../common/token.service';
 import { sendForm, preventDefault } from '../common/utils';
-import { generateErrorToast, generateSuccessToast } from '../common/toast';
+import { generateErrorToast } from '../common/toast';
 
 const API_URL = `${ENVIRONMENT.API_URL}/user/login`;
 
@@ -35,7 +35,7 @@ async function login(event) {
     errorHandling(token);
   } else {
     tokenService.set(token);
-    window.open('/hub?login=true', '_self');
+    window.open(`${ROUTES.hub}/?login=true`, '_self');
   }
 }
 

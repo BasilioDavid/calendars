@@ -42,6 +42,9 @@ function checkUrlParams() {
   if (parameters.get('login')) {
     generateSuccessToast('Inicio de sesión realizado con éxito');
   }
+  if (parameters.get('hub')) {
+    generateSuccessToast('Usuario registrado con éxito');
+  }
   if (parameters.get('order')) {
     generateSuccessToast('Calendario pedido con éxito');
   }
