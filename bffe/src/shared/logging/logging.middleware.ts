@@ -18,7 +18,6 @@ export class LoggingMiddleware implements NestMiddleware {
 
     res.send = (body: string | undefined) => {
       this.log.save('status', res.statusCode);
-      if (res.statusCode >= 400) this.log.save('response', body);
       return send.call(res, body);
     };
 

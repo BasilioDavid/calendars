@@ -8,5 +8,6 @@ import { LoggingService } from './logging.service';
     { provide: LoggingService, useClass: ConsoleLoggingService },
     LoggingMiddleware,
   ],
+  exports: [LoggingService],
 })
 export class LoggingModule {}
