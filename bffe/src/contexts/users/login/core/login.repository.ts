@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DBConnection } from '../../../../shared/database/db-connection';
+import { UserNotFoundException } from './exceptions/user-not-found.exception';
 
 @Injectable()
 export class LoginRepository {
@@ -13,7 +14,7 @@ export class LoginRepository {
       .executeTakeFirst();
 
     if (userDatabase?.password !== user.password) {
-      throw new Error('User not found');
+      throw new UserNotFoundException();
     }
 
     return {

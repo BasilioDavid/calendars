@@ -1,9 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseFilters } from '@nestjs/common';
 
 import { LoginService } from '../core/login.service';
 import { User } from '../core/value-objets/user.value-object';
+import { LoginExceptionFilter } from '../login.exception-filter';
 import { UserLoginDto } from './DTOs/user-login.dto';
 
+@UseFilters(LoginExceptionFilter)
 @Controller('user')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
