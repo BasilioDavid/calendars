@@ -9,6 +9,7 @@ import { DatabaseModule } from './shared/database/database.module';
 import { ContextModule } from './shared/context/context.module';
 import { GenerateCalendarModule } from './contexts/generate-calendar/images.module';
 import { LoggingModule } from './shared/logging/logging.module';
+import { ErrorModule } from './shared/errors/error.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { LoggingModule } from './shared/logging/logging.module';
     CalendarModule,
     GenerateCalendarModule,
     LoggingModule,
+    ErrorModule,
   ],
 })
 export class AppModule {}
