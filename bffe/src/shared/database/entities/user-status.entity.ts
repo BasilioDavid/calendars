@@ -1,4 +1,6 @@
+import { Generated } from 'kysely';
+
 export interface UserStatusEntity {
-  id: number;
+  id: Generated<number>;
   type: string;
 }

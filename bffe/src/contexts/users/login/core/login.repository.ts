@@ -12,7 +12,7 @@ export class LoginRepository {
       .select(['name', 'password', 'extId'])
       .executeTakeFirst();
 
-    if (userDatabase.password !== user.password) {
+    if (userDatabase?.password !== user.password) {
       throw new Error('User not found');
     }
 

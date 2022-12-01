@@ -26,7 +26,7 @@ export class UserService {
     if (!this.exist()) {
       throw new Error('Trying to get user before being initialized');
     }
-    return this.context.get(userSymbol);
+    return this.context.get(userSymbol) as User;
   }
 
   exist(): boolean {

@@ -4,7 +4,7 @@ import { OrderEntity } from './order.entity';
 import { UserStatusEntity } from './user-status.entity';
 import { UserEntity } from './user.entity';
 
-export class Database {
+export interface Database {
   image: ImageEntity;
   user: UserEntity;
   calendar: Calendar;

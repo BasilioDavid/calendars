@@ -1,7 +1,7 @@
-export class OrderCalendarDto {
-  postalCode: number;
+export interface OrderCalendarDto {
+  postalCode: string;
   city: string;
-  contactNumber: number;
+  contactNumber: string;
   direction: string;
   specitfications: string;
   instructions: string;

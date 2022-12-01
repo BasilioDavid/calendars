@@ -1,12 +1,11 @@
-import { Integer } from '../../../../shared/building-blocks/integer.value-object';
 import { NonEmptyString } from '../../../../shared/building-blocks/non-empty-string.value-object';
 import { ToPrimitives } from '../../../../shared/building-blocks/to-primitives';
 import { ValueObject } from '../../../../shared/building-blocks/value-object';
 
 interface OrderProps {
-  postalCode: Integer;
+  postalCode: NonEmptyString;
   city: NonEmptyString;
-  contactNumber: Integer;
+  contactNumber: NonEmptyString;
   direction: NonEmptyString;
   specitfications: NonEmptyString;
   instructions: NonEmptyString;
@@ -14,9 +13,9 @@ interface OrderProps {
 }
 
 interface OrderFromPrimitives {
-  postalCode: number;
+  postalCode: string;
   city: string;
-  contactNumber: number;
+  contactNumber: string;
   direction: string;
   specitfications: string;
   instructions: string;
@@ -40,10 +39,10 @@ export class Order
   }: OrderFromPrimitives) {
     return new Order({
       city: new NonEmptyString({ value: city }),
-      contactNumber: new Integer({ value: contactNumber }),
+      contactNumber: new NonEmptyString({ value: contactNumber }),
       direction: new NonEmptyString({ value: direction }),
       instructions: new NonEmptyString({ value: instructions }),
-      postalCode: new Integer({ value: postalCode }),
+      postalCode: new NonEmptyString({ value: postalCode }),
       specitfications: new NonEmptyString({ value: specitfications }),
       calendarExtId: new NonEmptyString({ value: calendarExtId }),
     });

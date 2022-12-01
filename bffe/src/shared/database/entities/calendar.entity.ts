@@ -1,5 +1,7 @@
+import { Generated } from 'kysely';
+
 export interface Calendar {
-  id: number;
+  id: Generated<number>;
   extId: string;
   name: string;
   userId: number;

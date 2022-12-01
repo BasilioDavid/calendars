@@ -1,3 +1,3 @@
-export class CreateCalendarDto {
+export interface CreateCalendarDto {
   name: string;
 }

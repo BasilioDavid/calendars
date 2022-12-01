@@ -1,5 +1,7 @@
+import { Generated } from 'kysely';
+
 export interface UserEntity {
-  id: number;
+  id: Generated<number>;
   extId: string;
   name: string;
   password: string;

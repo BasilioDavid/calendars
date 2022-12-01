@@ -1,12 +1,14 @@
+import { Generated } from 'kysely';
+
 export interface OrderEntity {
-  id: number;
+  id: Generated<number>;
   postalCode: string;
   city: string;
-  contactNumber: number;
+  contactNumber: string;
   direction: string;
-  specifications: string;
-  instructions: string;
+  specifications: string | undefined;
+  instructions: string | undefined;
   orderedAt: string;
-  deliveredAt: string;
+  deliveredAt: string | undefined;
   calendarId: number;
 }
