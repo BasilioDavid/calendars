@@ -42,9 +42,9 @@ async function login(event) {
 }
 
 function errorHandling(error) {
-  console.log('mostrando error de no usuario');
   if (error.errorCode === 'USERNOTFOUND')
-    generateErrorToast('Combinación de Usuario y contraseña erronea');
+    return generateErrorToast('Combinación de Usuario y contraseña erronea');
+  generateErrorToast('Un error desconocido ha sucedido');
 }
 
 window.login = login;
