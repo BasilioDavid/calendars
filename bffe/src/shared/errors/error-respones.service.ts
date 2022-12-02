@@ -10,14 +10,13 @@ export class ErrorResponse {
   send(error: ClientError | Error, host: ArgumentsHost) {
     const response = host.switchToHttp().getResponse<Response>();
 
+    this.log.save('error', error);
     if (error instanceof ClientError) {
-      this.log.save('error', error);
       const errorProps = error.serialize();
       response
         .status(400)
         .json({ errorCode: errorProps.code, message: errorProps.message });
     } else {
-      this.log.save('error', error);
       response.status(500).json({ errorCode: 'UNKNOWN' });
     }
   }
