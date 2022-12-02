@@ -4,7 +4,7 @@ import {
   ToPrimitives,
   UUID,
   ValueObject,
-} from '../../../../../shared/building-blocks/public_api';
+} from '../../../../shared/building-blocks/public_api';
 
 interface UserProps {
   name: NonEmptyString;

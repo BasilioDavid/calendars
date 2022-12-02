@@ -1,10 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { RegisterService } from '../core/register.service';
+import { RegisterService } from '../application/register.service';
 import { User } from '../core/value-objets/user.value-object';
 import { UserRegisterDto } from './DTOs/user-register.dto';
 
 @Controller('user')
-export class UsersController {
+export class RegisterController {
   constructor(private readonly registerService: RegisterService) {}
 
   @Post('register')

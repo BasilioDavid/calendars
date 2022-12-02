@@ -3,22 +3,24 @@ import { format } from 'date-fns';
 
 import { MYSQL_DATETIME_FORMAT, USER_STATUS } from '../../../../shared/consts';
 import { DBConnection } from '../../../../shared/database/db-connection';
+import {
+  GetInputFromRepository,
+  GetOutputFromRepository,
+} from '../../../../shared/utils/get-from-repository';
+import { RegisterRepository } from '../../core/repositories/register.repository';
 
 @Injectable()
-export class RegisterRepository {
-  constructor(private readonly dbConnection: DBConnection) {}
+export class DbRegisterRepositoryHandler extends RegisterRepository {
+  constructor(private readonly dbConnection: DBConnection) {
+    super();
+  }
 
   async handle({
     email,
     name,
     password,
     extId,
-  }: {
-    email: string;
-    name: string;
-    password: string;
-    extId: string;
-  }) {
+  }: GetInputFromRepository<RegisterRepository>): GetOutputFromRepository<RegisterRepository> {
     const user = await this.dbConnection
       .selectFrom('user')
       .where('email', '=', email)
