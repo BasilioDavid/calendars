@@ -1,8 +1,8 @@
-import { Integer } from '../../../shared/building-blocks/integer.value-object';
-import { NonEmptyString } from '../../../shared/building-blocks/non-empty-string.value-object';
-import { ToPrimitives } from '../../../shared/building-blocks/to-primitives';
-import { UUID } from '../../../shared/building-blocks/uuid.value-object';
-import { ValueObject } from '../../../shared/building-blocks/value-object';
+import { Integer } from '../../../../shared/building-blocks/integer.value-object';
+import { NonEmptyString } from '../../../../shared/building-blocks/non-empty-string.value-object';
+import { ToPrimitives } from '../../../../shared/building-blocks/to-primitives';
+import { UUID } from '../../../../shared/building-blocks/uuid.value-object';
+import { ValueObject } from '../../../../shared/building-blocks/value-object';
 
 interface CalendarProps {
   name: NonEmptyString;

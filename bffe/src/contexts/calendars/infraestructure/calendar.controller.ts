@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
-import { CalendarService } from '../core/calendars.service';
+import { CalendarService } from '../application/calendars.service';
 import { CreateCalendarDto } from './DTOs/create-calendar.dto';
 
 @Controller('calendar')
