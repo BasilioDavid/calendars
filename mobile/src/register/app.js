@@ -21,7 +21,7 @@ async function register(event) {
     errorHandling(token);
   } else {
     tokenService.set(token);
-    window.open(`${ROUTES.hub}/hub?register=true`, '_self');
+    window.open(`${ROUTES.hub}/?register=true`, '_self');
   }
 }
 
