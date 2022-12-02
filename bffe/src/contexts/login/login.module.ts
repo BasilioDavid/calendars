@@ -7,14 +7,12 @@ import { LoginUserRepository } from './core/repositories/login.repository';
 import { LoginController } from './infraestructure/login.controller';
 import { DbGenerateTokenRepositoryHandler } from './infraestructure/repository-handlers/db-generate-token.service';
 import { DBLoginUserRepositoryHandler } from './infraestructure/repository-handlers/db-login.repository';
-import { LoginExceptionFilter } from './login.exception-filter';
 
 @Module({
   imports: [ErrorModule],
   controllers: [LoginController],
   providers: [
     LoginService,
-    LoginExceptionFilter,
     { provide: LoginUserRepository, useClass: DBLoginUserRepositoryHandler },
     {
       provide: GenerateTokenRepository,
