@@ -25,6 +25,13 @@ async function getCalendars() {
   for (const calendar of calendars) {
     const a = document.createElement('a');
     const header = document.createElement('header');
+    const img = document.createElement('img');
+
+    img.src =
+      typeof calendar.image === 'undefined'
+        ? '/resources/utils/january.png'
+        : calendar.image;
+    header.appendChild(img);
     const section = document.createElement('section');
     const span1 = document.createElement('span');
     span1.textContent = calendar.name;
