@@ -11,19 +11,18 @@ import { ImageLoaderRepository } from '../core/repositories/image-loader.reposit
 @Injectable()
 export class GenerateCalendarService {
   private partFactory: { [K: number]: ImageDecorator } = {
-    0: new CoverImageDecorator(),
-    1: new MonthImageDecorator(1),
-    2: new MonthImageDecorator(2),
-    3: new MonthImageDecorator(3),
-    4: new MonthImageDecorator(4),
-    5: new MonthImageDecorator(5),
-    6: new MonthImageDecorator(6),
-    7: new MonthImageDecorator(7),
-    8: new MonthImageDecorator(8),
-    9: new MonthImageDecorator(9),
-    10: new MonthImageDecorator(10),
-    11: new MonthImageDecorator(11),
-    12: new MonthImageDecorator(12),
+    0: new MonthImageDecorator(1),
+    1: new MonthImageDecorator(2),
+    2: new MonthImageDecorator(3),
+    3: new MonthImageDecorator(4),
+    4: new MonthImageDecorator(5),
+    5: new MonthImageDecorator(6),
+    6: new MonthImageDecorator(7),
+    7: new MonthImageDecorator(8),
+    8: new MonthImageDecorator(9),
+    9: new MonthImageDecorator(10),
+    10: new MonthImageDecorator(11),
+    11: new MonthImageDecorator(12),
   };
   constructor(
     private readonly calendarRepository: GetCalendarImagesNameRepository,
