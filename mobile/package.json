@@ -1,0 +1,22 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "Copyright",
+  "scripts": {
+    "build:webpack": "webpack watch --config webpack.config.js --mode development",
+    "solve-troubleshooting": "sh ../tools/scripts/create-hard-links.sh"
+  },
+  "devDependencies": {
+    "@swc/html": "^0.0.18",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-minimizer-webpack-plugin": "^4.2.2",
+    "html-loader": "^4.1.0",
+    "html-minimizer-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "uglify-js": "^3.17.4",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

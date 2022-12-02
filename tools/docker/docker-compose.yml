@@ -25,6 +25,16 @@ services:
     - "../../frontend/dist/src:/usr/local/apache2/htdocs:z"
     networks:
       - intranet
+  apache-mobile:
+    image: httpd:2.4-alpine
+    container_name: calendars-apache-mobile
+    ports:
+      - '8081:80'
+    volumes:
+    # The :z is added due Selinux
+    - "../../mobile/dist/src:/usr/local/apache2/htdocs:z"
+    networks:
+      - intranet   
 
 networks:
   intranet:

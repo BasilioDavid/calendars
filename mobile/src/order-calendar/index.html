@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../styles/00-index.css">
+	<title>Pedir Calendario</title>
+</head>
+<body>
+	<article class="form-container">
+		<header>
+			<h1 class="title--main">Pedir Calendario</h1>
+		</header>
+		<form>
+			<input type="number" id="cp" placeholder="Código postal">
+			<input type="text" id="city" placeholder="Ciudad">
+			<input type="number" id="contactNumber" placeholder="Número de contacto">
+			<input type="text" id="direction" placeholder="Dirección">
+			<input type="text" id="specifications" placeholder="Piso, Número, Puerta">
+			<input type="text" id="instructions" placeholder="Instrucciones">
+			<div class="clickable">
+				<input type="checkbox" name="paymentMethod" id="paymentMethod">
+				<label for="paymentMethod">Entiendo que el pago de 10€ tiene que ser contra-reembolso o por bizum en el momento de la entrega</label>
+			</div>
+			<button onclick="send(event)">Pedir</button>
+		</form>
+	</article>
+	<script src=order-calendar.js></script>
+</body>
+</html>

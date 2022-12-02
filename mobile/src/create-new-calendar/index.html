@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Create new calendars</title>
+	<link rel="stylesheet" href="../styles/00-index.css">
+</head>
+<body class="header-main-display">
+	<header>
+		<h1>
+			<a href="/hub">
+				Calendarios Personalizados
+			</a>
+		</h1>
+	</header>
+	<main class="darker-white-bg">
+		<article class="form-container">
+			<header>
+				<h1 class="title--main">Crear un nuevo calendario</h1>
+			</header>
+			<form>
+				<input type="text" name="name" id="name" placeholder="Nombre">
+				<button onclick="create(event)">Crear</button>
+			</form>
+		</article>
+	</main>
+	<section class="stick-bottom">
+		<a href="/hub" class="logout">Volver</a>
+	</section>
+	<script src="create-new-calendar.js"></script>
+</body>
+</html>

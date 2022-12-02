@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../styles/00-index.css">
+	<title>Login</title>
+</head>
+<body>
+	<article class="form-container">
+		<header>
+			<h1 class="title--main">Iniciar sesion</h1>
+		</header>
+		<form>
+			<input type="email" name="email" id="email" placeholder="Inserte su email">
+			<input type="password" name="password" id="password" placeholder="Inserte su contraseña">
+			<div class="clickable">
+				<input type="checkbox" name="remember" id="remember">
+				<label for="remember">Recuerdame</label>
+			</div>
+			<button onclick="login(event)" disabled id="send">Enviar</button>
+		</form>
+		<a href="/register">¿Aún no tienes cuenta?</a>
+		<a href="/reset-password">¿Olvidaste tu contraseña?</a>
+	</article>
+	<script src=login.js></script>
+</body>
+</html>

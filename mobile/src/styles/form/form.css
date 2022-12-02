@@ -1,0 +1,95 @@
+.form-container {
+	margin: 5rem auto;
+	padding: 1rem 2rem 3rem 2rem;
+	border-radius: 50px;
+	display: flex;
+	flex: 1;
+	max-width: 100%;
+	width: 24rem;
+	/* min-height: 40rem; */
+	height: fit-content;
+	background-color: white;
+	flex-direction: column;
+	gap: 2rem;
+	box-shadow: -7px 10px 35px -12px rgba(0,0,0,0.78);
+}
+
+
+.form-container form {
+	display: flex;
+	width: 100%;
+	margin-bottom: 1rem;
+	max-width: 100%;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.form-container ::placeholder {
+	text-align: center;
+	color: black;
+	opacity: .6;
+	font-size: 15pt;
+}
+
+.form-container input[type=password],
+.form-container input[type=number],
+.form-container input:not([type]),
+.form-container input[type=email],
+.form-container button {
+	width: 100%;
+	font-size: 18pt;
+	border-radius: 50px;
+	padding: 10px;
+	text-align: center;
+	transition: background-color, border linear .2s ;
+}
+
+.form-container input[type=password],
+.form-container input[type=number],
+.form-container input:not([type]),
+.form-container input[type=email] {
+	background-color: var(--third-color-faded);
+	border: var(--third-color-darker) 1px solid;
+}
+
+.form-container input[type=checkbox] {
+	background-color: white;
+	cursor: pointer;
+	appearance: auto;
+	margin: 3px 3px 3px 4px;
+	padding: 0;
+	border: 1px;
+}
+
+.form-container input[type=password]:hover,
+.form-container input[type=number]:hover,
+.form-container input:not([type]):hover,
+.form-container input[type=email]:hover {
+	background-color: var(--third-color);
+	border: var(--third-color) 1px solid;
+	border: var(--third-color) 1px solid;
+}
+
+.form-container button {
+	background-color: var(--secondary);
+	border: var(--secondary) 1px solid;
+	color: white;
+}
+
+.form-container button:hover,.form-container button:disabled {
+	background-color: var(--secondary-faded);
+	border: var(--secondary-faded) 1px solid;
+}
+
+.form-container a {
+	color: var(--secondary)
+}
+
+.form-container a:visited {
+	color: var(--primary-darker)
+}
+
+.form-container .clickable label {
+	user-select: none;
+	cursor: pointer;
+}
