@@ -30,6 +30,7 @@ const partsName = [
   'july',
   'august',
   'september',
+  'october',
   'november',
   'december',
 ];
@@ -221,7 +222,7 @@ function main() {
     if (!partsCached[part]) {
       partsCached[part] = {
         normal: '/resources/utils/insert-here.png',
-        thumbnail: '',
+        thumbnail: `/resources/utils/${part}.png`,
       };
     }
     imagePreviewer.previewImage(partsCached[part].thumbnail);
