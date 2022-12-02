@@ -1,7 +1,9 @@
 import { token as tokenService } from '../common/token.service';
 import { ENVIRONMENT, ROUTES } from '../common/const';
+import { mobileGuard } from '../common/mobile.guard';
 import { sendForm, preventDefault } from '../common/utils';
 
+mobileGuard();
 tokenService.clear();
 
 const API_URL = `${ENVIRONMENT.API_URL}/user/register`;

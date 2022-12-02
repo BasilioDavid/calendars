@@ -1,5 +1,6 @@
 export const ENVIRONMENT = {
   API_URL: 'http://localhost:3000',
+  MOBILE_URL: 'http://localhost:8081',
 };
 
 export const ROUTES = {

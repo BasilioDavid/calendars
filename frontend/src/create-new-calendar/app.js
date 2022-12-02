@@ -1,8 +1,10 @@
 import { unregisteredUserGuard } from '../common/unregistered-user.guard';
+import { mobileGuard } from '../common/mobile.guard';
 import { sendForm, preventDefault } from '../common/utils';
 import { ENVIRONMENT } from '../common/const';
 import { token } from '../common/token.service';
 
+mobileGuard();
 unregisteredUserGuard();
 const userToken = token.get();
 

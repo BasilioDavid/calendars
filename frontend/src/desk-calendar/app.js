@@ -1,8 +1,10 @@
 import { unregisteredUserGuard } from '../common/unregistered-user.guard';
+import { mobileGuard } from '../common/mobile.guard';
 import { ENVIRONMENT } from '../common/const';
 import { sendForm, preventDefault } from '../common/utils';
 import { token } from '../common/token.service';
 
+mobileGuard();
 const UPLOAD_IMAGES_URL = `${ENVIRONMENT.API_URL}/images`;
 const GET_IMAGES_URL = `${ENVIRONMENT.API_URL}/images/all`;
 const GET_NAME_URL = `${ENVIRONMENT.API_URL}/images/name`;

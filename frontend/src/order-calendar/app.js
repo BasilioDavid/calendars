@@ -1,9 +1,11 @@
 import { ENVIRONMENT } from '../common/const';
+import { mobileGuard } from '../common/mobile.guard';
 import { unregisteredUserGuard } from '../common/unregistered-user.guard';
 import { token } from '../common/token.service';
 import { sendForm, preventDefault } from '../common/utils';
 
 const API_URL = `${ENVIRONMENT.API_URL}/calendar/order`;
+mobileGuard();
 unregisteredUserGuard();
 
 const userToken = token.get();

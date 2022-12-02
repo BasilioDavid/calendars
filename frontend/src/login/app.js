@@ -1,10 +1,12 @@
 import { ENVIRONMENT, ROUTES } from '../common/const';
+import { mobileGuard } from '../common/mobile.guard';
 import { token as tokenService } from '../common/token.service';
 import { sendForm, preventDefault } from '../common/utils';
 import { generateErrorToast } from '../common/toast';
 
 const API_URL = `${ENVIRONMENT.API_URL}/user/login`;
 
+mobileGuard();
 tokenService.clear();
 
 const emailField = document.getElementById('email');
