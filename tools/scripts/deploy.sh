@@ -41,7 +41,8 @@ echo -e "${green}mobile transpilado${reset}"
 
 
 echo "Arrancando bffe..."
-systemctl start bffe-calendars
+systemctl restart bffe-calendars
+systemctl status bffe-calendars
 echo -e "${green}bffe arrancado${reset}"
 
 echo -e "${green}Migraciones completadas${reset}"
