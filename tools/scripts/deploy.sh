@@ -37,7 +37,7 @@ cd bffe
 yarn install
 yarn build
 cd ..
-echo -e "${green}mobile transpilado${reset}"
+echo -e "${green}bffe transpilado${reset}"
 
 
 echo "Arrancando bffe..."
