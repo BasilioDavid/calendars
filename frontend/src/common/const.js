@@ -9,4 +9,5 @@ export const ROUTES = {
   deskCalendar: '/desk-calendar',
   login: '/login',
   register: '/register',
+  orderCalendar: '/order-calendar',
 };

@@ -15,7 +15,7 @@ const userToken = token.get();
 const parameters = new URLSearchParams(window.location.search);
 const calendarId = parameters.get('calendarId');
 
-if (typeof calendarId === 'undefined') {
+if (calendarId === null) {
   window.location.replace('/hub');
 }
 
@@ -24,7 +24,7 @@ document.getElementById('generateCalendar').href =
 
 const partsName = [
   'january',
-  'febrary',
+  'february',
   'march',
   'april',
   'may',
