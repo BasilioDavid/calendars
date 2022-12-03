@@ -40,24 +40,22 @@ const partsName = [
 // [part: string]: {normal: "", thumbnail: ""}
 const partsCached = {};
 async function loadImagesFromServer() {
-  let serverImages;
-  try {
-    const params = new URLSearchParams();
-    params.set('calendarId', calendarId);
-    const response = await sendForm({
-      url: GET_IMAGES_URL + '?' + params.toString(),
-      method: 'GET',
-      headers: {
-        authorization: userToken,
-      },
-    });
-    serverImages = response;
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-  for (const [partNumber, images] of Object.entries(serverImages)) {
-    partsCached[partsName[partNumber]] = images;
+  const params = new URLSearchParams();
+  params.set('calendarId', calendarId);
+  const serverImages = await sendForm({
+    url: GET_IMAGES_URL + '?' + params.toString(),
+    method: 'GET',
+    headers: {
+      authorization: userToken,
+    },
+  });
+
+  if (typeof serverImages.errorCode !== 'undefined') {
+    errorHandling(serverImages);
+  } else {
+    for (const [partNumber, images] of Object.entries(serverImages)) {
+      partsCached[partsName[partNumber]] = images;
+    }
   }
 }
 
@@ -79,11 +77,15 @@ class DragNDropOrchestator {
         file,
         this.part
       );
-      if (typeof processedFile === 'undefined') {
-        return;
+      if (typeof processedFile.errorCode !== 'undefined') {
+        errorHandling(processedFile);
+      } else {
+        if (typeof processedFile === 'undefined') {
+          return;
+        }
+        this.asidePartPreviewer.addImage(this.part, processedFile.thumbnail);
+        this.imagePreviewer.previewImage(processedFile.normal);
       }
-      this.asidePartPreviewer.addImage(this.part, processedFile.thumbnail);
-      this.imagePreviewer.previewImage(processedFile.normal);
     }
   }
 
@@ -172,24 +174,23 @@ class ImageUploader {
       return undefined;
     }
 
-    try {
-      const formData = new FormData();
-      formData.append('image', image);
-      formData.append('calendarId', calendarId);
-      formData.append('partNumber', partsName.indexOf(part));
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('calendarId', calendarId);
+    formData.append('partNumber', partsName.indexOf(part));
 
-      const data = sendForm({
-        url: UPLOAD_IMAGES_URL,
-        method: 'POST',
-        body: formData,
-        headers: {
-          authorization: userToken,
-        },
-      });
+    const data = await sendForm({
+      url: UPLOAD_IMAGES_URL,
+      method: 'POST',
+      body: formData,
+      headers: {
+        authorization: userToken,
+      },
+    });
+    if (typeof data.errorCode !== 'undefined') {
+      errorHandling(data);
+    } else {
       return data;
-    } catch (e) {
-      console.error(e);
-      throw e;
     }
   }
 }
@@ -238,24 +239,31 @@ function main() {
 
 async function loadNameFromServer() {
   const $title = document.getElementById('calendarTitle');
+  const params = new URLSearchParams();
+  params.set('calendarId', calendarId);
 
-  try {
-    const params = new URLSearchParams();
-    params.set('calendarId', calendarId);
-    const response = await sendForm({
-      url: GET_NAME_URL + '?' + params.toString(),
-      method: 'GET',
-      headers: {
-        authorization: userToken,
-      },
-    });
+  const response = await sendForm({
+    url: GET_NAME_URL + '?' + params.toString(),
+    method: 'GET',
+    headers: {
+      authorization: userToken,
+    },
+  });
+  if (typeof token.errorCode !== 'undefined') {
+    errorHandling(token);
+  } else {
     $title.innerText = response.calendarName;
-  } catch (e) {
-    console.error(e);
-    throw e;
   }
 }
-
+function errorHandling(error) {
+  if (error.errorCode === 'FORBIDDEN')
+    window.location = ROUTES.login + '?forbidden=true';
+  if (error.errorCode === 'CALENDARNOTFOUND')
+    window.location = ROUTES.hub + '?calendarnotfound=true';
+  generateErrorToast(
+    'Un error desconocido ha sucedido, por favor inténtelo de nuevo'
+  );
+}
 (async function init() {
   loadNameFromServer();
   await loadImagesFromServer();

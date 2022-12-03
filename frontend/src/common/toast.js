@@ -32,7 +32,7 @@ export function generateErrorToast(message) {
     message: message,
     background: 'hsl(19deg 98% 42%)',
     color: 'hsl(171deg 100% 3%)',
-    length: '5000ms',
+    length: '8000ms',
   });
 }
 

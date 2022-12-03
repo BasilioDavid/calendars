@@ -4,6 +4,7 @@ import {
   GetInputFromRepository,
   GetOutputFromRepository,
 } from '../../../../shared/utils/get-from-repository';
+import { CalendarNotFoundException } from '../../core/exceptions/calendar-not-found.exception';
 import { GetCalendarNameRepository } from '../../core/repositories/get-calendar-name.repository';
 
 @Injectable()
@@ -24,7 +25,7 @@ export class DBGetCalendarNameRepositoryHandler extends GetCalendarNameRepositor
       .executeTakeFirst();
 
     if (!calendar) {
-      throw new Error('Calendar not found');
+      throw new CalendarNotFoundException();
     }
     return { calendarName: calendar.name };
   }

@@ -22,6 +22,15 @@ async function getCalendars() {
       authorization: userToken,
     },
   });
+  if (typeof token.errorCode !== 'undefined') {
+    errorHandling(token);
+  } else {
+    displayCalendars(calendars);
+  }
+}
+
+function displayCalendars(calendars) {
+  // TODO: display a message when the user does not have any calendars
   for (const calendar of calendars) {
     const a = document.createElement('a');
     const header = document.createElement('header');
@@ -54,9 +63,28 @@ function checkUrlParams() {
   if (parameters.get('hub')) {
     generateSuccessToast('Usuario registrado con éxito');
   }
+  if (parameters.get('create')) {
+    generateSuccessToast('Calendario creado con éxito');
+  }
   if (parameters.get('order')) {
     generateSuccessToast('Calendario pedido con éxito');
   }
+  if (parameters.get('calendarnotfound')) {
+    generateErrorToast('No se ha podido encontrar el calendario');
+  }
+  if (parameters.get('alreadyordered')) {
+    generateErrorToast(
+      'El calendario ya ha sido pedido, si tiene dudas contacte con soporte'
+    );
+  }
+}
+function errorHandling(error) {
+  console.log('mostrando error de no usuario');
+  if (error.errorCode === 'FORBIDDEN')
+    window.location = ROUTES.login + '?forbidden=true';
+  generateErrorToast(
+    'Un error desconocido ha sucedido, por favor inténtelo de nuevo'
+  );
 }
 void checkUrlParams();
 getCalendars();

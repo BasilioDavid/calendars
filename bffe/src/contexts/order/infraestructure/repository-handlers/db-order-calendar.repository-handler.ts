@@ -4,6 +4,8 @@ import {
   GetInputFromRepository,
   GetOutputFromRepository,
 } from '../../../../shared/utils/get-from-repository';
+import { CalendarAlreadyOrderedException } from '../../core/exceptions/calendar-already-ordered.exception';
+import { CalendarNotFoundException } from '../../core/exceptions/calendar-not-found.exception';
 import { OrderCalendarRepository } from '../../core/repositories/order-calendar.repository';
 
 @Injectable()
@@ -34,11 +36,11 @@ export class DbOrderCalendarRepositoryHandler extends OrderCalendarRepository {
     const [calendar] = await Promise.all([calendarQuery]);
 
     if (!calendar) {
-      throw new Error('Calendar not found');
+      throw new CalendarNotFoundException();
     }
 
     if (calendar.statusId === calendarStatusId) {
-      throw new Error('Calendar Already ordered');
+      throw new CalendarAlreadyOrderedException();
     }
 
     const calendarParts = await this.dbConnection

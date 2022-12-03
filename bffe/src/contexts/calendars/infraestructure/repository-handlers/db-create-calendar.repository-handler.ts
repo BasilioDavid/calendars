@@ -4,6 +4,7 @@ import {
   GetInputFromRepository,
   GetOutputFromRepository,
 } from '../../../../shared/utils/get-from-repository';
+import { NameAlreadyExistException } from '../../core/exceptions/name-already-exist.exception';
 
 import { CreateCalendarRepository } from '../../core/repositories/create-calendar.repository';
 
@@ -27,7 +28,7 @@ export class DBCreateCalendarRepositoryHandler extends CreateCalendarRepository 
       .executeTakeFirst();
 
     if (typeof nameAlreadyExist !== 'undefined') {
-      throw new Error('Name or extId already exists');
+      throw new NameAlreadyExistException();
     }
 
     await this.dbConnection

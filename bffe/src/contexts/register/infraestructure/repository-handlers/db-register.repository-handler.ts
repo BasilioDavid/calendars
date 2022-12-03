@@ -7,6 +7,7 @@ import {
   GetInputFromRepository,
   GetOutputFromRepository,
 } from '../../../../shared/utils/get-from-repository';
+import { EmailAlreadyFoundException } from '../../core/exceptions/email-already-exist.exception';
 import { RegisterRepository } from '../../core/repositories/register.repository';
 
 @Injectable()
@@ -28,7 +29,7 @@ export class DbRegisterRepositoryHandler extends RegisterRepository {
       .executeTakeFirst();
 
     if (user) {
-      throw new Error('User already exist');
+      throw new EmailAlreadyFoundException();
     }
 
     await this.dbConnection

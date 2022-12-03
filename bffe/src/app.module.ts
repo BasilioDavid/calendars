@@ -12,6 +12,7 @@ import { LoggingModule } from './shared/logging/logging.module';
 import { ErrorModule } from './shared/errors/error.module';
 import { OrderModule } from './contexts/order/order.module';
 
+// TODO: handle options
 @Module({
   imports: [
     LivecheckModule,
@@ -25,6 +26,7 @@ import { OrderModule } from './contexts/order/order.module';
     GenerateCalendarModule,
     LoggingModule,
     ErrorModule,
+    OrderModule,
   ],
 })
 export class AppModule {}

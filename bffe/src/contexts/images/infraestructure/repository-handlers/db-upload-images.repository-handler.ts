@@ -4,6 +4,8 @@ import {
   GetInputFromRepository,
   GetOutputFromRepository,
 } from '../../../../shared/utils/get-from-repository';
+import { CalendarNotFoundException } from '../../core/exceptions/calendar-not-found.exception';
+import { FileNameAlreadyException } from '../../core/exceptions/file-name-already-exist.exception';
 import { UploadImagesRepository } from '../../core/repositories/upload-images.repository';
 
 @Injectable()
@@ -38,11 +40,11 @@ export class DBUploadImagesRepositoryHandler extends UploadImagesRepository {
 
     //TODO: handle this error in a diferent way
     if (fileNameAlreadyExist) {
-      throw new Error('Filename duplicated');
+      throw new FileNameAlreadyException();
     }
 
     if (!calendar) {
-      throw new Error('Calendar not found');
+      throw new CalendarNotFoundException();
     }
 
     const partImageAlreadyExist = await this.dbConnection

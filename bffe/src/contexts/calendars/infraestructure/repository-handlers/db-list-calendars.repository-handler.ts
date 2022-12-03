@@ -22,6 +22,10 @@ export class DbListCalendarsRepositoryHandler extends ListCalendarsRepository {
       .select(['extId', 'name', 'statusId', 'id'])
       .execute();
 
+    if (!calendars.length) {
+      return [];
+    }
+
     const images = await this.dbConnection
       .selectFrom('image')
       .where(

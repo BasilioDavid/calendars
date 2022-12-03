@@ -49,8 +49,12 @@ async function send(event) {
 }
 
 function errorHandling(error) {
-  if (error.errorCode === 'USERNOTFOUND')
-    return generateErrorToast('Combinación de Usuario y contraseña erronea');
+  if (error.errorCode === 'FORBIDDEN')
+    window.location = ROUTES.login + '?forbidden=true';
+  if (error.errorCode === 'CALENDARNOTFOUND')
+    window.location = ROUTES.hub + '?calendarnotfound=true';
+  if (error.errorCode === 'CALENDARALREADYORDERED')
+    window.location = ROUTES.hub + '?alreadyordered=true';
   generateErrorToast('Un error desconocido ha sucedido');
 }
 window.send = send;
