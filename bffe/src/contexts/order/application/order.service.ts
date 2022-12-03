@@ -24,7 +24,7 @@ export class OrderService {
       instructions: params.instructions,
       orderedAt: format(new Date(), MYSQL_DATETIME_FORMAT),
       postalCode: params.postalCode,
-      specifications: params.specitfications,
+      specifications: params.specifications,
       userId: this.userService.get().id,
     });
   }

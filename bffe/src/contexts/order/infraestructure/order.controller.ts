@@ -20,7 +20,7 @@ export class OrderController {
         direction: body.direction,
         instructions: body.instructions,
         postalCode: body.postalCode,
-        specitfications: body.specitfications,
+        specifications: body.specifications,
       })
     );
   }

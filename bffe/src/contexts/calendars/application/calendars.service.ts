@@ -43,7 +43,7 @@ export class CalendarService {
         const output = await this.imageLoaderRepositoryHandler.handle({
           imageName,
         });
-        image = output.image.toString();
+        image = output.image.toString('base64');
       }
       calendarsWithImgs.push({
         extId,

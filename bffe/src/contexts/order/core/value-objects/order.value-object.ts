@@ -7,7 +7,7 @@ interface OrderProps {
   city: NonEmptyString;
   contactNumber: NonEmptyString;
   direction: NonEmptyString;
-  specitfications: NonEmptyString;
+  specifications: NonEmptyString;
   instructions: NonEmptyString;
   calendarExtId: NonEmptyString;
 }
@@ -17,7 +17,7 @@ interface OrderFromPrimitives {
   city: string;
   contactNumber: string;
   direction: string;
-  specitfications: string;
+  specifications: string;
   instructions: string;
   calendarExtId: string;
 }
@@ -34,7 +34,7 @@ export class Order
     direction,
     instructions,
     postalCode,
-    specitfications,
+    specifications,
     calendarExtId,
   }: OrderFromPrimitives) {
     return new Order({
@@ -43,7 +43,7 @@ export class Order
       direction: new NonEmptyString({ value: direction }),
       instructions: new NonEmptyString({ value: instructions }),
       postalCode: new NonEmptyString({ value: postalCode }),
-      specitfications: new NonEmptyString({ value: specitfications }),
+      specifications: new NonEmptyString({ value: specifications }),
       calendarExtId: new NonEmptyString({ value: calendarExtId }),
     });
   }
@@ -59,7 +59,7 @@ export class Order
       direction: this.props.direction.toPrimitives(),
       instructions: this.props.instructions.toPrimitives(),
       postalCode: this.props.postalCode.toPrimitives(),
-      specitfications: this.props.specitfications.toPrimitives(),
+      specifications: this.props.specifications.toPrimitives(),
       calendarExtId: this.props.calendarExtId.toPrimitives(),
     };
   }
