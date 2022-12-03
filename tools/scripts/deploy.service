@@ -1,0 +1,21 @@
+[Unit]
+Description=bffe
+#Require mysql
+After=mysql.service
+
+[Service]
+WorkingDirectory=
+ExecStart=/bin/bash -ce "exec /usr/local/bin/node main.js >> main.log 2>&1"
+
+Restart=always
+
+# if node crash restar after 10s
+RerstartSec=10
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=bffe-calendars
+#Environment=
+
+[Install]
+WantedBy=multy-user.target

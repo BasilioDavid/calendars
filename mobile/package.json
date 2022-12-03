@@ -5,6 +5,7 @@
   "license": "Copyright",
   "scripts": {
     "build:webpack": "webpack watch --config webpack.config.js --mode development",
+    "build:webpack-prod": "webpack --config webpack.config.js --mode production",
     "solve-troubleshooting": "sh ../tools/scripts/create-hard-links.sh"
   },
   "devDependencies": {
