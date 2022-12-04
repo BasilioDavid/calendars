@@ -24,7 +24,11 @@ export class LoggingMiddleware implements NestMiddleware {
     const logResponse = () => {
       res.removeListener('finish', logResponse);
       res.removeListener('close', logResponse);
-      this.log.writeAll();
+      try {
+        this.log.writeAll();
+      } catch (e) {
+        console.log('ALL WENT WRONG');
+      }
     };
 
     res.on('finish', logResponse);
