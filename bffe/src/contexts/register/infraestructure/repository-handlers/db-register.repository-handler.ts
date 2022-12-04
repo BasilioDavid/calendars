@@ -37,7 +37,6 @@ export class DbRegisterRepositoryHandler extends RegisterRepository {
       .values({
         email,
         password,
-        createAt: format(new Date(), MYSQL_DATETIME_FORMAT),
         name,
         statusId: USER_STATUS['ACTIVATED'],
         extId,
