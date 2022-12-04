@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Part } from '../../../shared/building-blocks/part.value-object';
 import { ImageDecorator } from '../../../shared/image-decorators/image-decorator';
 import { UserService } from '../../../shared/user/user.service';
-import { CoverImageDecorator } from '../core/image-decorators/cover.image-decorator';
-import { MinifierImageDecorator } from '../core/image-decorators/minifier.image-decorator';
+import { UglyfierImageDecorator } from '../core/image-decorators/uglyfier.image-decorator';
 import { MonthImageDecorator } from '../core/image-decorators/month.image-decorator';
 import { GetCalendarImagesNameRepository } from '../core/repositories/get-calendar-images-name.repository';
 import { ImageLoaderRepository } from '../core/repositories/image-loader.repository';
@@ -37,7 +36,7 @@ export class GenerateCalendarService {
     });
     const result: Buffer[] = [];
 
-    const minifier = new MinifierImageDecorator();
+    const minifier = new UglyfierImageDecorator();
     for (const image of imagesRaw) {
       const part = Part.fromPrimives({
         number: image.calendarMonthNumber,
