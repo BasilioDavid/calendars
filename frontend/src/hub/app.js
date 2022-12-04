@@ -1,7 +1,11 @@
 import { unregisteredUserGuard } from '../common/unregistered-user.guard';
 import { mobileGuard } from '../common/mobile.guard';
 import { sendForm, preventDefault } from '../common/utils';
-import { ENVIRONMENT, ROUTES } from '../common/const';
+import {
+  CALENDAR_STATUS_ID_TO_NAME,
+  ENVIRONMENT,
+  ROUTES,
+} from '../common/const';
 import { token } from '../common/token.service';
 import { generateErrorToast, generateSuccessToast } from '../common/toast';
 
@@ -11,7 +15,7 @@ const userToken = token.get();
 
 const API_URL = `${ENVIRONMENT.API_URL}/calendar/list`;
 
-const $article = document.querySelector('article');
+const $article = document.getElementById('rug');
 
 async function getCalendars() {
   const calendars = await sendForm({
@@ -30,7 +34,11 @@ async function getCalendars() {
 }
 
 function displayCalendars(calendars) {
-  // TODO: display a message when the user does not have any calendars
+  if (!calendars.length) {
+    const error = document.getElementById('errorMessage');
+    error.style.display = 'block';
+    return;
+  }
   for (const calendar of calendars) {
     const a = document.createElement('a');
     const header = document.createElement('header');
@@ -45,7 +53,7 @@ function displayCalendars(calendars) {
     const span1 = document.createElement('span');
     span1.textContent = calendar.name;
     const span = document.createElement('span');
-    span.textContent = calendar.statusId;
+    span.textContent = CALENDAR_STATUS_ID_TO_NAME[calendar.statusId];
     a.href = ROUTES.deskCalendar + `?calendarId=${calendar.extId}`;
     a.appendChild(header);
     a.appendChild(section);
@@ -76,6 +84,9 @@ function checkUrlParams() {
     generateErrorToast(
       'El calendario ya ha sido pedido, si tiene dudas contacte con soporte'
     );
+  }
+  if (parameters.get('error')) {
+    generateErrorToast('Algo no ha ido como debería');
   }
 }
 function errorHandling(error) {
