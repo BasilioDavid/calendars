@@ -2,6 +2,7 @@ import { token as tokenService } from '../common/token.service';
 import { ENVIRONMENT, ROUTES } from '../common/const';
 import { mobileGuard } from '../common/mobile.guard';
 import { sendForm, preventDefault } from '../common/utils';
+import { generateErrorToast, generateSuccessToast } from '../common/toast';
 
 mobileGuard();
 tokenService.clear();
@@ -14,10 +15,15 @@ const nameField = document.getElementById('name');
 
 async function register(event) {
   preventDefault(event);
-  const token = await sendForm(API_URL, 'POST', {
-    email: emailField.value,
-    password: passwordField.value,
-    name: nameField.value,
+  const token = await sendForm({
+    url: API_URL,
+    method: 'POST',
+    body: {
+      email: emailField.value,
+      password: passwordField.value,
+      name: nameField.value,
+    },
+    headers: { 'Content-Type': 'application/json' },
   });
   if (typeof token.errorCode !== 'undefined') {
     errorHandling(token);
@@ -28,7 +34,6 @@ async function register(event) {
 }
 
 function errorHandling(error) {
-  console.log('mostrando error de no usuario');
   if (error.errorCode === 'EMAILALREADYFOUND')
     generateErrorToast('El email ya ha sido registrado');
   generateErrorToast('Un error desconocido ha sucedido');
