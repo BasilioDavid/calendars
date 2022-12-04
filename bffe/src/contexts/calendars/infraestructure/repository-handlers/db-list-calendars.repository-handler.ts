@@ -33,7 +33,7 @@ export class DbListCalendarsRepositoryHandler extends ListCalendarsRepository {
         'in',
         calendars.map(({ id }) => id)
       )
-      .where('partNumber', '=', 1)
+      .where('partNumber', '=', 0)
       .select(['calendarId', 'fileName'])
       .execute();
 
