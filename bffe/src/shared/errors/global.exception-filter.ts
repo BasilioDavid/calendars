@@ -5,6 +5,6 @@ import { ErrorResponse } from './error-respones.service';
 export class GlobalExceptionFilter implements ExceptionFilter {
   constructor(private readonly error: ErrorResponse) {}
   catch(exception: any, host: ArgumentsHost) {
-    this.error.send(exception, host.switchToHttp().getResponse());
+    this.error.logNSend(exception, host.switchToHttp().getResponse());
   }
 }

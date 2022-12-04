@@ -7,8 +7,11 @@ import { LoggingService } from '../logging/logging.service';
 @Injectable()
 export class ErrorResponse {
   constructor(private readonly log: LoggingService) {}
-  send(error: ClientError | Error | unknown, response: Response) {
+  logNSend(error: ClientError | Error | unknown, response: Response) {
     this.log.save('error', error);
+    this.send(error, response);
+  }
+  send(error: ClientError | Error | unknown, response: Response) {
     if (error instanceof ClientError) {
       const errorProps = error.serialize();
       response
