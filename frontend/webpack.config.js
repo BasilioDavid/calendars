@@ -40,10 +40,13 @@ module.exports = {
           context: path.resolve(__dirname),
           from: './src/**/*.css',
         },
-
         {
           context: path.resolve(__dirname),
           from: './src/**/*.png',
+        },
+        {
+          context: path.resolve(__dirname),
+          from: './src/**/*.jpg',
         },
       ],
     }),
