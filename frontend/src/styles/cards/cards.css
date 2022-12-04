@@ -1,7 +1,9 @@
 .rug {
 	display: flex;
-	gap: 1rem;
+	gap: 2rem;
 	margin: 2rem;
+	max-width: 100%;
+	flex-wrap: wrap;
 }
 
 .rug > * {

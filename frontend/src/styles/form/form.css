@@ -80,14 +80,6 @@
 	border: var(--secondary-faded) 1px solid;
 }
 
-.form-container .action-zone a {
-	color: var(--secondary)
-}
-
-.form-container .action-zone a:visited {
-	color: var(--primary-darker)
-}
-
 .form-container .action-zone {
 	display: flex;
 	justify-content: space-between;

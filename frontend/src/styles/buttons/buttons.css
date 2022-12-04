@@ -1,0 +1,17 @@
+.button {
+	padding: 10px;
+	border-radius: 50px;	
+	color: black;
+}
+
+.info {
+	background-color: lightblue;
+}
+
+.ok {
+	background-color: green;
+}
+
+.not-ok {
+	background-color: red;
+}
