@@ -17,8 +17,8 @@ export class NonEmptyString
   constructor({ value }: NonEmptyStringProps) {
     super({ value });
     invariant(
-      'Value Object must be a non empty string',
-      typeof value === 'string' && value.length > 0,
+      'Value Object must be a non empty string, value: ' + value,
+      typeof value === 'string' && value.length > 0
     );
   }
 
