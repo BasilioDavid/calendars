@@ -4,7 +4,7 @@ import { GenerateCalendarService } from '../application/generate-calendar.servic
 
 @Controller('calendar')
 @UseGuards(AuthGuard)
-export class CalendarController {
+export class GenerateCalendarController {
   constructor(private readonly generationCalendar: GenerateCalendarService) {}
 
   @Get('generate')

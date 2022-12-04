@@ -5,6 +5,7 @@ import {
   GetInputFromRepository,
   GetOutputFromRepository,
 } from '../../../../shared/utils/get-from-repository';
+import { CalendarNotFoundException } from '../../core/exceptions/calendar-not-found.exception';
 import { GetCalendarImagesNameRepository } from '../../core/repositories/get-calendar-images-name.repository';
 
 @Injectable()
@@ -24,7 +25,7 @@ export class DBGetCalendarImagesNameRepositoryHandler extends GetCalendarImagesN
       .executeTakeFirst();
 
     if (!userHasCalendar) {
-      throw new Error('User has no relation with calendar');
+      throw new CalendarNotFoundException();
     }
 
     const images = await this.dbConnection

@@ -51,6 +51,9 @@ export class GenerateCalendarService {
       result.push(imageMinified);
     }
 
-    return result.map((calendar) => calendar.toString('base64'));
+    return {
+      images: result.map((calendar) => calendar.toString('base64')),
+      imagesLeft: 12 - result.length,
+    };
   }
 }
