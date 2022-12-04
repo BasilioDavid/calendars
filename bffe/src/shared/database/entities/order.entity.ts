@@ -8,7 +8,7 @@ export interface OrderEntity {
   direction: string;
   specifications: string | undefined;
   instructions: string | undefined;
-  orderedAt: string;
+  orderedAt: string | undefined;
   deliveredAt: string | undefined;
   calendarId: number;
 }
