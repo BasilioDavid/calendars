@@ -3,6 +3,7 @@ import { mobileGuard } from '../common/mobile.guard';
 import { sendForm, preventDefault } from '../common/utils';
 import { ENVIRONMENT, ROUTES } from '../common/const';
 import { token } from '../common/token.service';
+import { generateErrorToast, generateSuccessToast } from '../common/toast';
 
 mobileGuard();
 unregisteredUserGuard();
@@ -23,9 +24,10 @@ async function create(e) {
       authorization: userToken,
     },
   });
-  window.location.href = ROUTES.hub + '?create=true';
   if (typeof result.errorCode !== 'undefined') {
     errorHandling(result);
+  } else {
+    window.location.href = ROUTES.hub + '?create=true';
   }
 }
 
