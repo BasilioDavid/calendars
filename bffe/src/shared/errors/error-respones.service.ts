@@ -1,15 +1,13 @@
 import { Response } from 'express';
-import { ArgumentsHost, Injectable } from '@nestjs/common';
-import { ClientError, UnknownError } from './client-error.interface';
+import { Injectable } from '@nestjs/common';
+import { ClientError } from './client-error.interface';
 import { LoggingService } from '../logging/logging.service';
 
 // TODO: change this into global exception filter
 @Injectable()
 export class ErrorResponse {
   constructor(private readonly log: LoggingService) {}
-  send(error: ClientError | Error, host: ArgumentsHost) {
-    const response = host.switchToHttp().getResponse<Response>();
-
+  send(error: ClientError | Error | unknown, response: Response) {
     this.log.save('error', error);
     if (error instanceof ClientError) {
       const errorProps = error.serialize();
