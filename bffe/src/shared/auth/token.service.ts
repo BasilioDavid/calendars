@@ -1,5 +1,6 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import { ForbiddenException } from './forbidden.exception';
 
 @Injectable()
 export class TokenService {
