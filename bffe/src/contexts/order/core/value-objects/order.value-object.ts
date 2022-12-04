@@ -7,8 +7,8 @@ interface OrderProps {
   city: NonEmptyString;
   contactNumber: NonEmptyString;
   direction: NonEmptyString;
-  specifications: NonEmptyString;
-  instructions: NonEmptyString;
+  specifications?: NonEmptyString | undefined;
+  instructions?: NonEmptyString | undefined;
   calendarExtId: NonEmptyString;
 }
 
@@ -17,8 +17,8 @@ interface OrderFromPrimitives {
   city: string;
   contactNumber: string;
   direction: string;
-  specifications: string;
-  instructions: string;
+  specifications?: string | undefined;
+  instructions?: string | undefined;
   calendarExtId: string;
 }
 
@@ -41,9 +41,15 @@ export class Order
       city: new NonEmptyString({ value: city }),
       contactNumber: new NonEmptyString({ value: contactNumber }),
       direction: new NonEmptyString({ value: direction }),
-      instructions: new NonEmptyString({ value: instructions }),
+      instructions:
+        typeof instructions === 'undefined' || instructions?.length === 0
+          ? undefined
+          : new NonEmptyString({ value: instructions }),
       postalCode: new NonEmptyString({ value: postalCode }),
-      specifications: new NonEmptyString({ value: specifications }),
+      specifications:
+        typeof specifications === 'undefined' || specifications?.length === 0
+          ? undefined
+          : new NonEmptyString({ value: specifications }),
       calendarExtId: new NonEmptyString({ value: calendarExtId }),
     });
   }
@@ -57,9 +63,9 @@ export class Order
       city: this.props.city.toPrimitives(),
       contactNumber: this.props.contactNumber.toPrimitives(),
       direction: this.props.direction.toPrimitives(),
-      instructions: this.props.instructions.toPrimitives(),
+      instructions: this.props.instructions?.toPrimitives(),
       postalCode: this.props.postalCode.toPrimitives(),
-      specifications: this.props.specifications.toPrimitives(),
+      specifications: this.props.specifications?.toPrimitives(),
       calendarExtId: this.props.calendarExtId.toPrimitives(),
     };
   }

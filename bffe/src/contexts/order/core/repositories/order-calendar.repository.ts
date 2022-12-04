@@ -7,8 +7,8 @@ type OrderCalendarRepositoryInput = {
   city: string;
   contactNumber: string;
   direction: string;
-  specifications: string;
-  instructions: string;
+  specifications?: string | undefined;
+  instructions?: string | undefined;
   orderedAt: string;
   calendarStatusId: number;
 };

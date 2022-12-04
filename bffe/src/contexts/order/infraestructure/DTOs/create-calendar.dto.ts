@@ -3,7 +3,7 @@ export interface OrderCalendarDto {
   city: string;
   contactNumber: string;
   direction: string;
-  specifications: string;
-  instructions: string;
+  specifications?: string | undefined;
+  instructions?: string | undefined;
   calendarId: string;
 }
