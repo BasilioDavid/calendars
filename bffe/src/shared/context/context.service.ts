@@ -11,8 +11,8 @@ export class ContextService<
   >
 > {
   run(nextFuction: () => unknown) {
-    als.run(new Map<any, any>(), async () => {
-      nextFuction();
+    als.run(new Map<any, any>(), () => {
+      return nextFuction();
     });
   }
 
