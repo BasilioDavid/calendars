@@ -16,11 +16,12 @@
 			<input type="text" name="name" id="name" placeholder="Inserte su nombre completo">
 			<input type="email" name="email" id="email" placeholder="Inserte su email">
 			<input type="password" name="password" id="password" placeholder="Inserte su contraseña">
-			<input type="password" name="password" id="password" placeholder="Vuelva a insertar su contraseña">
-			<button onclick="register(event)">Enviar</button>
+			<input type="password" name="password2" id="password2" placeholder="Vuelva a insertar su contraseña">
+			<p style="display: none; color: var(--failure)" id="errorMessage">Las contraseñas no coinciden</p>
+			<button onclick="register(event)" disabled id="send">Enviar</button>
 			<div class="action-zone">
 				<a href="/login" class="link">¿Ya tienes una cuenta?</a>
-				<a href="/reset-password" class="link">¿Olvidaste tu contraseña?</a>
+				<a href="/recover-password" class="link">¿Olvidaste tu contraseña?</a>
 			</div>
 		</form>
 	</article>
