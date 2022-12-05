@@ -21,14 +21,14 @@ fi;
 echo "Transpilando frontend..."
 cd frontend
 yarn install
-yarn build:wepback-prod
+yarn build:webpack-prod
 cd ..
 echo -e "${green}frontend transpilado${reset}"
 
 echo "Transpilando mobile..."
 cd mobile
 yarn install
-yarn build:wepback-prod
+yarn build:webpack-prod
 cd ..
 echo -e "${green}mobile transpilado${reset}"
 
