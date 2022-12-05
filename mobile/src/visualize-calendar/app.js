@@ -2,6 +2,7 @@ import { unregisteredUserGuard } from '../common/unregistered-user.guard';
 import { ENVIRONMENT, ROUTES } from '../common/const';
 import { sendForm, preventDefault } from '../common/utils';
 import { token } from '../common/token.service';
+import { generateErrorToast, generateSuccessToast } from '../common/toast';
 
 const API_URL = `${ENVIRONMENT.API_URL}/calendar/generate`;
 unregisteredUserGuard();
