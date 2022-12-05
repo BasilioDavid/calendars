@@ -26,7 +26,7 @@ import { environment } from '../environments/environment';
           }),
           plugins: [new CamelCasePlugin()],
           log(event) {
-            console.log(event);
+            // console.log(event);
           },
         }),
     },
