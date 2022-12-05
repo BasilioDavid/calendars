@@ -30,7 +30,7 @@ function generateToast({
 export function generateErrorToast(message) {
   generateToast({
     message: message,
-    background: 'hsl(19deg 98% 42%)',
+    background: 'var(--failure)',
     color: 'hsl(171deg 100% 3%)',
     length: '8000ms',
   });
@@ -39,7 +39,7 @@ export function generateErrorToast(message) {
 export function generateSuccessToast(message) {
   generateToast({
     message: message,
-    background: 'hsl(127deg 94% 40%)',
+    background: 'var(--success)',
     color: 'hsl(171deg 100% 3%)',
     length: '5000ms',
   });

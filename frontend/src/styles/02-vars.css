@@ -9,6 +9,9 @@
 	--third-color: #52d0fa9c;
 	--third-color-darker: #255d709c;
 	--third-color-faded: #52d0fa36;
+	--success: #76F58C;
+	--failure: #F65463;
+	--info: #5D72F5;
 }
 
 * {
