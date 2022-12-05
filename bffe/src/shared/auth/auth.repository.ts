@@ -1,6 +1,7 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { USER_STATUS } from '../consts';
 import { DBConnection } from '../database/db-connection';
+import { ForbiddenException } from './forbidden.exception';
 
 @Injectable()
 export class AuthRepository {
