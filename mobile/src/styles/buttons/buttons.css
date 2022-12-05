@@ -1,0 +1,17 @@
+.button {
+	padding: 10px;
+	border-radius: 50px;	
+	color: black;
+}
+
+.info {
+	background-color: var(--info)
+}
+
+.ok {
+	background-color: var(--success)
+}
+
+.not-ok {
+	background-color: var(--failure)
+}

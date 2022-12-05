@@ -2,9 +2,50 @@
 @import url("./dropzone/dropzone.css");
 @import url("./cards/cards.css");
 @import url("./toast/toast.css");
+@import url("./buttons/buttons.css");
 
 body {
 	background-color: var(--primary-faded);
+}
+
+a.link {
+	color: var(--secondary)
+}
+
+a.link:visited {
+	color: var(--primary-darker)
+}
+
+.center {
+	margin-top: 2rem;
+	margin-left: 5rem;
+	margin-right: 5rem;
+	font-size: 15pt;
+}
+
+.margins {
+	margin-top: 2rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.margins .flex {
+	display: flex;
+	justify-content: space-around;
+}
+
+.margins .text {
+	line-height: 40px;
+}
+
+.italic{
+	font-style: oblique;
+}
+
+.bold {
+	font-weight: bold;
 }
 
 .header-main-display > main.darker-white-bg {
@@ -34,18 +75,8 @@ body {
 	background-color: white;
 	border-top-right-radius: 50px;
 	border-top-left-radius: 50px;
+	height: 100%;
 }
-
-.new {
-	/* TODO: change color */
-	background-color: green;
-}
-
-.logout {
-	/* TODO: change color */
-	background-color: red;
-}
-
 
 .title--main {
 	text-align: center;

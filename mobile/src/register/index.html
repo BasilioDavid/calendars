@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../styles/00-index.css">
-	<title>Login</title>
+	<title>Registrarse</title>
 </head>
 <body>
 	<article class="form-container">
@@ -16,10 +16,11 @@
 			<input type="text" name="name" id="name" placeholder="Inserte su nombre completo">
 			<input type="email" name="email" id="email" placeholder="Inserte su email">
 			<input type="password" name="password" id="password" placeholder="Inserte su contraseña">
-			<input type="password" name="password" id="password" placeholder="Vuelva a insertar su contraseña">
-			<button onclick="register(event)">Enviar</button>
-			<a href="/login">¿Ya tienes una cuenta?</a>
-			<a href="/reset-password">¿Olvidaste tu contraseña?</a>
+			<input type="password" name="password2" id="password2" placeholder="Vuelva a insertar su contraseña">
+			<p style="display: none; color: var(--failure)" id="errorMessage">Las contraseñas no coinciden</p>
+			<button onclick="register(event)" disabled id="send">Enviar</button>
+			<a href="/login" class="link">¿Ya tienes una cuenta?</a>
+			<a href="/recover-password" class="link">¿Olvidaste tu contraseña?</a>
 		</form>
 	</article>
 	<script src="register.js"></script>

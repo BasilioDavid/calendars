@@ -13,11 +13,16 @@
 	</header>
 	<main>
 		<h2 class="title--main">Tus Calendarios</h2>
-		<article class="rug"></article>
+		<article id="errorMessage" style="display: none;" class="center">
+			<p>
+      Aún no has creado ningun calendario, crea uno <a href="/create-new-calendar" class="link">aquí</a>.
+			</p>
+		</article>
+		<article class="rug" id="rug"></article>
 	</main>
 	<section class="stick-bottom">
-		<a href="/login" class="logout">Cerrar sesion</a>
-		<a href="/create-new-calendar" class="new">Crear un nuevo calendario</a>
+		<a href="/login" class="button not-ok">Cerrar sesion</a>
+		<a href="/create-new-calendar" class="button ok">Crear un nuevo calendario</a>
 	</section>
 	<script src="hub.js"></script>
 </body>
