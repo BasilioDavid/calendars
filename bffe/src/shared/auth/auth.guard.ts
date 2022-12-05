@@ -1,14 +1,10 @@
 import { Request } from 'express';
-import {
-  CanActivate,
-  ExecutionContext,
-  ForbiddenException,
-  Injectable,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 
 import { TokenService } from './token.service';
 import { UserService } from '../user/user.service';
 import { AuthRepository } from './auth.repository';
+import { ForbiddenException } from './forbidden.exception';
 
 interface User {
   email: string;
@@ -27,7 +23,7 @@ export class AuthGuard implements CanActivate {
     const token = context.switchToHttp().getRequest<Request>().headers[
       'authorization'
     ];
-    if (typeof token == 'undefined') {
+    if (typeof token === 'undefined') {
       throw new ForbiddenException();
     }
     const user = this.tokenService.decode<User>(token);
