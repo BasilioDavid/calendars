@@ -34,7 +34,7 @@ export class GenerateCalendarService {
       calendarExtId,
       userId: this.userService.get().id,
     });
-    const result: Buffer[] = [];
+    const result: { monthNumber: number; image: Buffer }[] = [];
 
     const minifier = new UglyfierImageDecorator();
     for (const image of imagesRaw) {
@@ -48,11 +48,17 @@ export class GenerateCalendarService {
         buffers.image
       );
       const imageMinified = await minifier.decorate(imageProcessed);
-      result.push(imageMinified);
+      result.push({
+        image: imageMinified,
+        monthNumber: image.calendarMonthNumber,
+      });
     }
 
     return {
-      images: result.map((calendar) => calendar.toString('base64')),
+      months: result.map(({ image, monthNumber }) => ({
+        image: image.toString('base64'),
+        monthNumber,
+      })),
       imagesLeft: 12 - result.length,
     };
   }

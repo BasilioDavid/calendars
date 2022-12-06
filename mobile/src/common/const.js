@@ -17,3 +17,18 @@ export const CALENDAR_STATUS_ID_TO_NAME = {
   4: 'Pedido',
   5: 'Entregado',
 };
+
+export const CALENDAR_NUMBER_TO_NAME = {
+  0: 'Enero',
+  1: 'Febrero',
+  2: 'Marzo',
+  3: 'Abril',
+  4: 'Mayo',
+  5: 'Junio',
+  6: 'Julio',
+  7: 'Agosto',
+  8: 'Septiembre',
+  9: 'Octubre',
+  10: 'Noviembre',
+  11: 'Diciembre',
+};

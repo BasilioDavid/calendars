@@ -1,5 +1,5 @@
 import { unregisteredUserGuard } from '../common/unregistered-user.guard';
-import { ENVIRONMENT, ROUTES } from '../common/const';
+import { CALENDAR_NUMBER_TO_NAME, ENVIRONMENT, ROUTES } from '../common/const';
 import { sendForm, preventDefault } from '../common/utils';
 import { token } from '../common/token.service';
 import { generateErrorToast, generateSuccessToast } from '../common/toast';
@@ -36,14 +36,14 @@ async function init() {
 }
 
 function loadImages(images) {
-  for (const image of images.images) {
+  for (const month of images.months) {
     const div = document.createElement('div');
     const header = document.createElement('header');
     const img = document.createElement('img');
     const section = document.createElement('section');
     const p = document.createElement('p');
-    p.textContent = 'Enero';
-    img.src = 'data:image/png;base64, ' + image;
+    p.textContent = CALENDAR_NUMBER_TO_NAME[month.monthNumber];
+    img.src = 'data:image/png;base64, ' + month.image;
     header.appendChild(img);
     section.appendChild(p);
     div.appendChild(header);
