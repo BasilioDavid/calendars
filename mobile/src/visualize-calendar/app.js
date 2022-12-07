@@ -31,8 +31,14 @@ async function init() {
   if (typeof images.errorCode !== 'undefined') {
     errorHandling(images);
   } else {
+    hideLoading();
     loadImages(images);
   }
+}
+
+const $loading = document.getElementById('loading');
+function hideLoading() {
+  $loading.style.zIndex = -1;
 }
 
 function loadImages(images) {
