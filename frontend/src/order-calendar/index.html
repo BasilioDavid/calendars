@@ -20,8 +20,12 @@
 			<input type="text" id="specifications" placeholder="Piso, Número, Puerta">
 			<input type="text" id="instructions" placeholder="Instrucciones">
 			<div class="clickable">
+				<input type="checkbox" name="wrapper" id="wrapper">
+				<label for="wrapper">Quiero el calendario envuelto (+1€)</label>
+			</div>
+			<div class="clickable">
 				<input type="checkbox" name="paymentMethod" id="paymentMethod">
-				<label for="paymentMethod">Entiendo que el pago de 10€ tiene que ser contra-reembolso o por bizum en el momento de la entrega</label>
+				<label for="paymentMethod">Entiendo que el pago de 10€ (o 11€ en caso de que este sea envuelto) tiene que ser contra-reembolso o por bizum en el momento de la entrega*</label>
 			</div>
 			<button onclick="workPlsss(event)" id="send" disabled>Pedir</button>
 		</form>
