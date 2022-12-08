@@ -46,7 +46,7 @@ CREATE TABLE `order` (
 	city varchar(255) NOT NULL,
     contact_number INT NOT NULL,
 	direction varchar(255) NOT NULL,
-	specitfications varchar(255) NULL,
+	specifications varchar(255) NULL,
     ordered_at TIMESTAMP NOT NULL,
     delivered_at TIMESTAMP NULL,
 	instructions text NULL,
