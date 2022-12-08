@@ -11,6 +11,7 @@ type OrderCalendarRepositoryInput = {
   instructions?: string | undefined;
   orderedAt: string;
   calendarStatusId: number;
+  wrapper: boolean;
 };
 
 export abstract class OrderCalendarRepository extends Repositoy<

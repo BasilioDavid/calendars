@@ -10,6 +10,7 @@ interface OrderProps {
   specifications?: NonEmptyString | undefined;
   instructions?: NonEmptyString | undefined;
   calendarExtId: NonEmptyString;
+  wrapper: boolean;
 }
 
 interface OrderFromPrimitives {
@@ -20,6 +21,7 @@ interface OrderFromPrimitives {
   specifications?: string | undefined;
   instructions?: string | undefined;
   calendarExtId: string;
+  wrapper: boolean;
 }
 
 type OrderToPrimitives = OrderFromPrimitives;
@@ -36,6 +38,7 @@ export class Order
     postalCode,
     specifications,
     calendarExtId,
+    wrapper,
   }: OrderFromPrimitives) {
     return new Order({
       city: new NonEmptyString({ value: city }),
@@ -51,6 +54,7 @@ export class Order
           ? undefined
           : new NonEmptyString({ value: specifications }),
       calendarExtId: new NonEmptyString({ value: calendarExtId }),
+      wrapper,
     });
   }
 
@@ -67,6 +71,7 @@ export class Order
       postalCode: this.props.postalCode.toPrimitives(),
       specifications: this.props.specifications?.toPrimitives(),
       calendarExtId: this.props.calendarExtId.toPrimitives(),
+      wrapper: this.props.wrapper,
     };
   }
 }

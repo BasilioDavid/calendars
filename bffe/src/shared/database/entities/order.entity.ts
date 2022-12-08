@@ -11,4 +11,5 @@ export interface OrderEntity {
   orderedAt: string | undefined;
   deliveredAt: string | undefined;
   calendarId: number;
+  wrapper: number;
 }

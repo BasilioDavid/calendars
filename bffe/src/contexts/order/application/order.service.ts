@@ -26,6 +26,7 @@ export class OrderService {
       postalCode: params.postalCode,
       specifications: params.specifications,
       userId: this.userService.get().id,
+      wrapper: params.wrapper,
     });
   }
 }

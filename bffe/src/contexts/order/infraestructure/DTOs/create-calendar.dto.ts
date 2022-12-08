@@ -6,4 +6,5 @@ export interface OrderCalendarDto {
   specifications?: string | undefined;
   instructions?: string | undefined;
   calendarId: string;
+  wrapper: boolean;
 }

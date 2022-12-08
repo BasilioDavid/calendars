@@ -23,6 +23,7 @@ export class DbOrderCalendarRepositoryHandler extends OrderCalendarRepository {
     direction,
     instructions,
     orderedAt,
+    wrapper,
     postalCode,
     specifications,
     userId,
@@ -65,6 +66,7 @@ export class DbOrderCalendarRepositoryHandler extends OrderCalendarRepository {
           postalCode,
           specifications,
           instructions,
+          wrapper: wrapper ? 1 : 0,
         },
       ])
       .execute();

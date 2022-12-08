@@ -14,6 +14,7 @@ export class OrderController {
   async create(@Body() body: OrderCalendarDto) {
     await this.orderService.orderCalendar(
       Order.fromPrimitives({
+        wrapper: body.wrapper,
         calendarExtId: body.calendarId,
         city: body.city,
         contactNumber: body.contactNumber,
